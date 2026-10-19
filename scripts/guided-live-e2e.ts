@@ -222,7 +222,7 @@ try {
         : undefined,
     'alternatives consent available',
   );
-  await clickText(page, 'Compare verified options');
+  await clickText(page, 'Compare prices');
   const compared = await done((await child((j) => j.comparisonOf?.jobId === source.id)).id);
   assert.deepEqual(runtime.store.get(source.id), source);
   assert.ok(compared.comparison);
