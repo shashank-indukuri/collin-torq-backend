@@ -1,0 +1,96 @@
+{
+  "sourceUrl": "https://www.johnstonesupply.com/store406/contact-us",
+  "observedAt": "2026-10-19T15:14:09.054Z",
+  "stores": [
+    {
+      "id": "461",
+      "name": "Alexandria",
+      "address": "6584 Fleet Drive, Fleet Industrial Park, Alexandria, VA 22310",
+      "phone": "(703) 719-7770"
+    },
+    {
+      "id": "406",
+      "name": "Arbutus",
+      "address": "1660 Sulphur Spring Rd., Arbutus, MD 21227",
+      "phone": "(410) 568-7390"
+    },
+    {
+      "id": "578",
+      "name": "Cheektowaga",
+      "address": "2540 Walden Ave, Suite 100, Cheektowaga, NY 14225",
+      "phone": "(716) 683-7435"
+    },
+    {
+      "id": "123",
+      "name": "Easton",
+      "address": "2609 Dearborn Street, Easton, PA 18045-6017",
+      "phone": "(610) 258-5651"
+    },
+    {
+      "id": "462",
+      "name": "Gainesville",
+      "address": "14205 John Marshall Hwy, Gainesville, VA 20155",
+      "phone": "(703) 530-8990"
+    },
+    {
+      "id": "445",
+      "name": "Gaithersburg",
+      "address": "9172 Gaither Road, Gaithersburg, MD 20877",
+      "phone": "(301) 321-3500"
+    },
+    {
+      "id": "248",
+      "name": "Harrisburg",
+      "address": "2221 Sycamore Street, Harrisburg, PA 17111-1026",
+      "phone": "(717) 233-7593"
+    },
+    {
+      "id": "412",
+      "name": "Lancaster",
+      "address": "340 West Roseville Road, Lancaster, PA 17601",
+      "phone": "(717) 286-0301"
+    },
+    {
+      "id": "704",
+      "name": "Pittston",
+      "address": "400 Keystone Avenue, Pittston, PA 18640",
+      "phone": "(570)-446-5900"
+    },
+    {
+      "id": "193",
+      "name": "Reading",
+      "address": "2300-A N. 5th St. Highway, Reading, PA 19605-2803",
+      "phone": "(610) 373-3665"
+    },
+    {
+      "id": "575",
+      "name": "Rochester",
+      "address": "95 Halstead Street, Rochester, NY 14610-1923",
+      "phone": "(585) 482-8000"
+    },
+    {
+      "id": "369",
+      "name": "Rosedale",
+      "address": "9100 Yellow Brick Road, Suite A-C1, Rosedale, MD 21237",
+      "phone": "(410) 391 5495"
+    },
+    {
+      "id": "562",
+      "name": "Sterling",
+      "address": "22650 Executive Drive, Ste 101, Sterling, VA 20166",
+      "phone": "(571) 346-3797"
+    },
+    {
+      "id": "576",
+      "name": "Syracuse",
+      "address": "6808 Crossbow Drive, East Syracuse, NY 13057",
+      "phone": "(315) 479-8800"
+    },
+    {
+      "id": "579",
+      "name": "Tonawanda",
+      "address": "9 Cooper Avenue, Tonawanda, NY 14150-6649",
+      "phone": "(716) 447-0285"
+    }
+  ]
+}

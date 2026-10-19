@@ -1,3 +1,4 @@
+import { mutateSource } from './mutation-locate.js';
 import assert from 'node:assert/strict';
 import { readFile, writeFile, rm } from 'node:fs/promises';
 import { randomUUID } from 'node:crypto';
@@ -38,13 +39,14 @@ const cases = [
 ];
 for (const mutation of cases) {
   const source = await readFile(`src/${mutation.module}.ts`, 'utf8');
-  assert.ok(source.includes(mutation.from));
+  const mutated_mutation = mutateSource(source, mutation.from, mutation.to);
+  assert.ok(mutated_mutation !== null);
   const suite = await readFile(`tests/${mutation.suite}.test.ts`, 'utf8');
   const id = randomUUID();
   const module = `src/.stress-mutant-${id}.ts`,
     test = `tests/.stress-mutant-${id}.test.ts`;
   try {
-    await writeFile(module, source.replace(mutation.from, mutation.to));
+    await writeFile(module, mutated_mutation!);
     await writeFile(
       test,
       suite.replaceAll(`../src/${mutation.module}.js`, `../src/.stress-mutant-${id}.js`),
@@ -94,6 +96,7 @@ for (const mutation of [
     module = `.local/recover-mutant-${id}.py`,
     test = `tests/.stress-mutant-${id}.test.ts`;
   const source = await readFile('python/recover.py', 'utf8');
+  // Python is not reformatted, so an exact match is required here.
   assert.ok(source.includes(mutation.from));
   try {
     await writeFile(module, source.replace(mutation.from, mutation.to));

@@ -112,35 +112,129 @@ test('categories use independent evidence, deterministic ties and requested quan
   b.commercial!.price.amount = 10;
   assert.equal(compareOffers([b, a], input.lines[0]!, origin, now).cheapest.winners.length, 2);
 });
-test('stock, pack rounding and cents prevent an apparently cheap insufficient offer from winning', () => {
+test('pack rounding and cents cost whole packs; short stock is a caveat, not a hidden winner', () => {
   const o = offer();
   o.commercial!.price = { ...o.commercial!.price, unit: 'pack', packSize: 3, amount: 1.01 };
   o.commercial!.requestedQuantity = 4;
   o.commercial!.shipping.quantity = 5;
   o.commercial!.branches[0]!.stockQuantity = 5;
+  const short = compareOffers([o], { ...input.lines[0]!, quantity: 4 }, origin, now);
+  assert.equal(short.cheapest.winners[0]!.materialSubtotal, 2.02);
+  assert.ok(
+    short.cheapest.winners[0]!.caveats.includes('Stock for the requested quantity was not shown.'),
+  );
+  assert.equal(short.closest.winners.length, 0, '5 in stock cannot cover 2 packs of 3');
+  assert.equal(short.stockedBranches.length, 0);
+  o.commercial!.shipping.quantity = 6;
+  const enough = compareOffers([o], { ...input.lines[0]!, quantity: 4 }, origin, now);
+  assert.equal(enough.cheapest.winners[0]!.materialSubtotal, 2.02);
+  assert.deepEqual(enough.cheapest.winners[0]!.caveats, []);
+  o.commercial!.price.packSize = null;
   assert.equal(
     compareOffers([o], { ...input.lines[0]!, quantity: 4 }, origin, now).cheapest.winners.length,
     0,
-  );
-  o.commercial!.shipping.quantity = 6;
-  assert.equal(
-    compareOffers([o], { ...input.lines[0]!, quantity: 4 }, origin, now).cheapest.winners[0]!
-      .materialSubtotal,
-    2.02,
+    'a pack with no stated size cannot be costed',
   );
 });
-test('unknown condition, price units, future pickup and company stock cannot invent category winners', () => {
+test('unstated condition, unit, currency and pickup readiness rank with caveats; refurbished does not', () => {
   const o = offer();
   o.commercial!.price.condition = null;
+  o.commercial!.price.currency = null;
   o.commercial!.branches[0]!.pickupReady = false;
   o.commercial!.shipping.arrivalDate = null;
   const r = compareOffers([o], input.lines[0]!, origin, now);
-  assert.equal(r.cheapest.winners.length, 0);
-  assert.equal(r.closest.winners.length, 0);
-  assert.equal(r.fastestShipping.winners.length, 0);
-  o.commercial!.price.condition = 'new';
+  assert.deepEqual(r.cheapest.winners[0]!.caveats, [
+    'Currency not stated on the page; US supplier pricing assumed.',
+    'Condition not stated on the page.',
+  ]);
+  assert.deepEqual(r.closest.winners[0]!.caveats, [
+    'Supplier lists a later pickup time; call to confirm.',
+  ]);
+  assert.equal(r.fastestShipping.winners.length, 0, 'fastest keeps its strict rule');
   o.commercial!.price.unit = null;
+  o.commercial!.price.packSize = null;
+  o.commercial!.branches[0]!.pickupReady = null;
+  o.commercial!.branches[0]!.quantityBasis = 'unknown';
+  const loose = compareOffers([o], input.lines[0]!, origin, now);
+  assert.equal(loose.cheapest.winners[0]!.materialSubtotal, 20);
+  assert.ok(
+    loose.cheapest.winners[0]!.caveats.includes(
+      'Purchase unit not stated; price read as one unit.',
+    ),
+  );
+  assert.deepEqual(loose.stockedBranches[0]!.caveats, [
+    'Stock count unit not stated.',
+    'Pickup readiness not stated; call the store to confirm.',
+  ]);
+  o.commercial!.price.condition = 'refurbished';
   assert.equal(compareOffers([o], input.lines[0]!, origin, now).cheapest.winners.length, 0);
+});
+test('every store showing enough stock is listed for a call, located or not, nearest first', () => {
+  const o = offer('johnstone');
+  const e = o.commercial!.evidence;
+  o.commercial!.branches = [
+    {
+      id: '406',
+      name: 'Arbutus',
+      address: '',
+      stockQuantity: 2,
+      quantityBasis: 'unknown',
+      pickupReady: null,
+      evidence: e,
+    },
+    {
+      id: '369',
+      name: 'Rosedale',
+      address: '',
+      stockQuantity: 5,
+      quantityBasis: 'unknown',
+      pickupReady: null,
+      evidence: e,
+    },
+    {
+      id: '461',
+      name: 'Alexandria',
+      address: '6584 Fleet Drive, Alexandria, VA 22310',
+      stockQuantity: 3,
+      quantityBasis: 'unknown',
+      pickupReady: null,
+      location: { ...origin, point: { latitude: 38.77, longitude: -77.18 } },
+      evidence: e,
+    },
+    {
+      id: '704',
+      name: 'Pittston',
+      address: '',
+      stockQuantity: 1,
+      quantityBasis: 'unknown',
+      pickupReady: null,
+      evidence: e,
+    },
+  ];
+  const r = compareOffers([o], input.lines[0]!, origin, now);
+  assert.deepEqual(
+    r.stockedBranches.map((b) => b.branchId),
+    ['461', '369', '406'],
+  );
+  assert.ok(r.stockedBranches[2]!.caveats.includes('Store address not captured.'));
+  assert.equal(r.stockedBranches[2]!.address, null);
+  assert.deepEqual(
+    r.closest.winners.map((w) => w.branchId),
+    ['461'],
+  );
+  o.commercial!.branches[1]!.address = '9100 Yellow Brick Road, Rosedale, MD 21237';
+  assert.ok(
+    compareOffers([o], input.lines[0]!, origin, now)
+      .stockedBranches.find((b) => b.branchId === '369')!
+      .caveats.includes('Distance unavailable; the address could not be located.'),
+  );
+  o.commercial!.branches[0]!.evidence = { ...e, observedAt: '2026-10-17T12:00:00Z' };
+  assert.ok(
+    !compareOffers([o], input.lines[0]!, origin, now).stockedBranches.some(
+      (b) => b.branchId === '406',
+    ),
+    'stale stock is not listed',
+  );
 });
 test('stale, future-dated, wrong identity, wrong quantity and synthetic evidence fail closed', () => {
   for (const mutate of [
@@ -229,8 +323,11 @@ test('numeric inventory corruption never becomes sufficient branch or shipping s
     o.commercial!.branches[0]!.stockQuantity = quantity;
     o.commercial!.shipping.quantity = quantity;
     const r = compareOffers([o], input.lines[0]!, origin, now);
-    assert.equal(r.cheapest.winners.length, 0);
+    assert.ok(
+      r.cheapest.winners[0]!.caveats.includes('Stock for the requested quantity was not shown.'),
+    );
     assert.equal(r.closest.winners.length, 0);
+    assert.equal(r.stockedBranches.length, 0);
   }
 });
 test('large subtotals cannot overflow precise integer cents', () => {
@@ -476,6 +573,7 @@ test('expired comparison views clear winners without changing durable snapshots'
     const view = comparisonView(job, now + 1);
     assert.equal(view.state, 'needs_input');
     assert.equal(view.comparison!.lines[0]!.rankings.cheapest.winners.length, 0);
+    assert.equal(view.comparison!.lines[0]!.rankings.cheapest.options.length, 0);
     assert.deepEqual(job, before);
   } finally {
     store.db.close();
@@ -568,9 +666,13 @@ test('an open console clears expired comparison winners without mutating saved e
       lines: [
         {
           rankings: {
-            cheapest: { winners: [{ supplier: 'partstown' }] },
+            cheapest: {
+              winners: [{ supplier: 'partstown' }],
+              options: [{ supplier: 'partstown' }],
+            },
             closest: { winners: [{ supplier: 'johnstone' }] },
             fastestShipping: { winners: [{ supplier: 'grainger' }] },
+            stockedBranches: [{ supplier: 'johnstone', branchId: '406' }],
           },
         },
       ],
@@ -581,8 +683,11 @@ test('an open console clears expired comparison winners without mutating saved e
     const expired = display(job, stamp);
     assert.equal(expired.state, 'needs_input');
     assert.match(expired.message, /expired/);
-    for (const category of Object.values(expired.comparison.lines[0].rankings) as any[])
-      assert.equal(category.winners.length, 0);
+    const rankings = expired.comparison.lines[0].rankings;
+    for (const key of ['cheapest', 'closest', 'fastestShipping'])
+      assert.equal(rankings[key].winners.length, 0);
+    assert.equal(rankings.stockedBranches.length, 0);
+    assert.equal(rankings.cheapest.options.length, 0);
   }
   assert.equal(job.comparison.lines[0]!.rankings.fastestShipping.winners.length, 1);
   assert.equal(display({ ...job, state: 'running' }, now + 60000).state, 'running');
@@ -634,4 +739,42 @@ test('the console schedules expiry even after a job finishes and ignores a super
     job: { ...job, comparison: { expiresAt: new Date(now).toISOString() } },
   });
   assert.equal(callback, undefined);
+});
+
+test('agent sourcing builds the comparison from its own results with one supplier pass', async () => {
+  const { config } = await import('../src/config.js');
+  const engine = config.supplierEngine;
+  config.supplierEngine = 'agent';
+  const store = new Store(':memory:');
+  const current = offer();
+  current.commercial!.evidence.observedAt = new Date().toISOString();
+  for (const b of current.commercial!.branches)
+    b.evidence.observedAt = current.commercial!.evidence.observedAt;
+  let calls = 0;
+  const { app } = createApp(store, undefined, async () => {
+    calls++;
+    return { offers: [structuredClone(current)], evidence: current.commercial!.evidence };
+  });
+  try {
+    const created = await app.inject({
+      method: 'POST',
+      url: '/api/searches',
+      payload: { ...input, suppliers: ['partstown'] },
+    });
+    await exclusive(async () => {});
+    for (
+      let i = 0;
+      i < 50 && ['queued', 'running'].includes(store.get(created.json().id)!.state);
+      i++
+    )
+      await new Promise((r) => setTimeout(r, 20));
+    const job = store.get(created.json().id)!;
+    assert.equal(calls, 1, 'no second supplier search');
+    assert.ok(job.comparison, 'comparison attached to the sourcing job');
+    assert.equal(job.comparison!.lines[0]!.rankings.cheapest.options.length, 1);
+    assert.equal(job.comparison!.lines[0]!.rankings.cheapest.options[0]!.materialSubtotal, 20);
+  } finally {
+    config.supplierEngine = engine;
+    await app.close();
+  }
 });

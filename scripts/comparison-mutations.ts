@@ -1,3 +1,4 @@
+import { mutateSource } from './mutation-locate.js';
 import assert from 'node:assert/strict';
 import { readFile, writeFile, rm } from 'node:fs/promises';
 import { randomUUID } from 'node:crypto';
@@ -18,11 +19,32 @@ const cases = [
     pattern: 'stale, future-dated',
   },
   {
-    module: 'comparison-policy',
-    name: 'future pickup becomes ready stock',
-    from: 'b.pickupReady===true&&',
+    module: 'comparison',
+    name: 'expired comparison keeps listing prices',
+    from: 'line.rankings.cheapest.options=[];',
     to: '',
-    pattern: 'unknown condition',
+    pattern: 'expired comparison views clear winners',
+  },
+  {
+    module: 'comparison-policy',
+    name: 'stale branch stock is listed for a call',
+    from: 'fresh(b.evidence)&&Number.isSafeInteger(b.stockQuantity)',
+    to: 'Number.isSafeInteger(b.stockQuantity)',
+    pattern: 'every store showing enough stock',
+  },
+  {
+    module: 'comparison-policy',
+    name: 'refurbished price ranks cheapest',
+    from: "&&p.condition!=='refurbished'",
+    to: '',
+    pattern: 'unstated condition',
+  },
+  {
+    module: 'comparison-policy',
+    name: 'unsized pack is costed as one unit',
+    from: '?p.packSize!:null',
+    to: '?p.packSize!:1',
+    pattern: 'pack rounding',
   },
   {
     module: 'comparison-policy',
@@ -55,12 +77,13 @@ const cases = [
 ];
 for (const c of cases) {
   const source = await readFile(`src/${c.module}.ts`, 'utf8');
-  assert.ok(source.includes(c.from), 'Mutation target missing: ' + c.name);
+  const mutated_c = mutateSource(source, c.from, c.to);
+  assert.ok(mutated_c !== null, 'Mutation target missing: ' + c.name);
   const id = randomUUID(),
     module = `src/.comparison-mutant-${id}.ts`,
     test = `tests/.comparison-mutant-${id}.test.ts`;
   try {
-    await writeFile(module, source.replace(c.from, c.to));
+    await writeFile(module, mutated_c!);
     await writeFile(
       test,
       (await readFile('tests/comparison.test.ts', 'utf8')).replaceAll(

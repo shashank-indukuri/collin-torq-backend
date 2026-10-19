@@ -1,3 +1,4 @@
+import { mutateSource } from './mutation-locate.js';
 // Prove the regressions catch deliberately reintroduced bugs. Only temporary
 // module/test copies are changed; the running backend's sources stay intact.
 import assert from 'node:assert/strict';
@@ -27,12 +28,13 @@ const mutations = [
   },
 ];
 for (const m of mutations) {
-  assert.ok(source.includes(m.from), `Mutation location changed: ${m.name}`);
+  const mutated_m = mutateSource(source, m.from, m.to);
+  assert.ok(mutated_m !== null, `Mutation location changed: ${m.name}`);
   const suffix = randomUUID();
   const modulePath = `src/.guide-mutant-${suffix}.ts`;
   const testPath = `tests/.guide-mutant-${suffix}.test.ts`;
   try {
-    await writeFile(modulePath, source.replace(m.from, m.to));
+    await writeFile(modulePath, mutated_m!);
     await writeFile(
       testPath,
       suite.replace('../src/guides.js', `../src/.guide-mutant-${suffix}.js`),

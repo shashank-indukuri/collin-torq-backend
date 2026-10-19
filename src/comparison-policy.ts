@@ -31,6 +31,9 @@ export type CommercialObservation = {
     stockQuantity: number | null;
     quantityBasis: 'each' | 'unknown';
     pickupReady: boolean | null;
+    /** Where the address came from when the product page did not print it. */
+    addressSource?: { url: string; observedAt: string };
+    phone?: string | null;
     location?: GeoResolution;
     distanceMiles?: number;
     evidence: Evidence;
@@ -47,6 +50,21 @@ export type ComparisonChoice = {
   distanceMiles?: number;
   arrivalDate?: string;
   evidence: Evidence;
+  /** What the page did not state; shown to the tech next to the winner. */
+  caveats: string[];
+};
+export type StockedBranch = {
+  supplier: Offer['supplier'];
+  branchId: string;
+  name: string;
+  address: string | null;
+  /** 'page' when the product page printed it; otherwise the store list URL. */
+  addressSource: 'page' | { url: string; observedAt: string } | null;
+  phone: string | null;
+  stockQuantity: number;
+  distanceMiles?: number;
+  evidence: Evidence;
+  caveats: string[];
 };
 export function compareOffers(
   offers: Offer[],
@@ -57,6 +75,7 @@ export function compareOffers(
   const cheapest: ComparisonChoice[] = [],
     closest: ComparisonChoice[] = [],
     shipping: ComparisonChoice[] = [],
+    stocked: StockedBranch[] = [],
     excluded: { supplier: string; reasons: string[] }[] = [];
   const fresh = (e: Evidence) => {
     const age = now - Date.parse(e.observedAt);
@@ -107,29 +126,41 @@ export function compareOffers(
     }
     const observed = o!;
     const p = observed.price;
-    const pack = p.packSize;
-    const unitKnown =
-      (p.unit === 'each' && pack === 1) ||
-      (p.unit === 'pack' && Number.isInteger(pack) && pack! > 0);
+    const caveats: string[] = [];
+    // Unit: a stated pack size is honored. An unstated unit is read as the
+    // price of one unit and said so; a pack with no stated size cannot be costed.
+    const pack =
+      p.unit === 'each'
+        ? 1
+        : p.unit === 'pack'
+          ? Number.isInteger(p.packSize) && p.packSize! > 0
+            ? p.packSize!
+            : null
+          : 1;
+    if (p.unit === null) caveats.push('Purchase unit not stated; price read as one unit.');
+    if (p.unit === 'each' && p.packSize !== null && p.packSize !== 1)
+      caveats.push('Pack size conflicts with each pricing.');
+    if (p.currency === null)
+      caveats.push('Currency not stated on the page; US supplier pricing assumed.');
+    if (p.condition === null) caveats.push('Condition not stated on the page.');
     const cents = p.amount === null ? null : Math.round(p.amount * 100),
       totalCents =
-        unitKnown && cents !== null ? Math.ceil(requested.quantity / pack!) * cents : NaN;
+        pack !== null && cents !== null ? Math.ceil(requested.quantity / pack) * cents : NaN;
     const total =
-      unitKnown &&
+      pack !== null &&
+      !(p.unit === 'each' && p.packSize !== null && p.packSize !== 1) &&
       cents !== null &&
       Number.isSafeInteger(cents) &&
       Number.isSafeInteger(totalCents) &&
       cents >= 0 &&
-      p.currency === 'USD'
+      p.condition !== 'refurbished'
         ? totalCents / 100
         : null;
-    const required = unitKnown ? Math.ceil(requested.quantity / pack!) * pack! : requested.quantity;
-    const sufficientBranches = observed.branches.filter(
+    const required =
+      pack !== null ? Math.ceil(requested.quantity / pack) * pack : requested.quantity;
+    const stockedBranches = observed.branches.filter(
       (b) =>
-        unitKnown &&
         fresh(b.evidence) &&
-        b.pickupReady === true &&
-        b.quantityBasis === 'each' &&
         Number.isSafeInteger(b.stockQuantity) &&
         b.stockQuantity !== null &&
         b.stockQuantity >= required,
@@ -139,37 +170,72 @@ export function compareOffers(
       Number.isSafeInteger(observed.shipping.quantity) &&
       observed.shipping.quantity !== null &&
       observed.shipping.quantity >= required;
+    if (!shipQuantity && !stockedBranches.length)
+      caveats.push('Stock for the requested quantity was not shown.');
     const choice: ComparisonChoice = {
       supplier: offer.supplier,
       partNumber: offer.partNumber,
       sourceUrl: offer.sourceUrl,
       materialSubtotal: total,
       evidence: observed.evidence,
+      caveats,
     };
-    if (total !== null && p.condition === 'new' && (shipQuantity || sufficientBranches.length))
-      cheapest.push(choice);
+    if (total !== null) cheapest.push(choice);
     else
       reasons.push(
-        'Cheapest needs USD purchase units, new condition and sufficient evidenced quantity; tax/freight are excluded.',
+        'Cheapest needs a readable price for new or unstated condition and a known pack size; tax/freight are excluded.',
       );
-    for (const branch of sufficientBranches) {
-      if (
+    for (const branch of stockedBranches) {
+      const branchCaveats = [
+        ...(branch.quantityBasis === 'each' ? [] : ['Stock count unit not stated.']),
+        ...(branch.pickupReady === true
+          ? []
+          : branch.pickupReady === false
+            ? ['Supplier lists a later pickup time; call to confirm.']
+            : ['Pickup readiness not stated; call the store to confirm.']),
+      ];
+      const located =
         origin.status === 'resolved' &&
         origin.point &&
         branch.location?.status === 'resolved' &&
         branch.location.point
-      )
+          ? distanceMiles(origin.point, branch.location.point)
+          : undefined;
+      stocked.push({
+        supplier: offer.supplier,
+        branchId: branch.id,
+        name: branch.name,
+        address: branch.address || null,
+        addressSource: branch.address ? (branch.addressSource ?? 'page') : null,
+        phone: branch.phone ?? null,
+        stockQuantity: branch.stockQuantity!,
+        ...(located !== undefined ? { distanceMiles: located } : {}),
+        evidence: branch.evidence,
+        caveats: [
+          ...branchCaveats,
+          ...(branch.address && located === undefined
+            ? ['Distance unavailable; the address could not be located.']
+            : []),
+          ...(!branch.address
+            ? ['Store address not captured.']
+            : branch.addressSource
+              ? [
+                  `Address from the supplier's store list (${branch.addressSource.observedAt.slice(0, 10)}).`,
+                ]
+              : []),
+        ],
+      });
+      if (located !== undefined)
         closest.push({
           ...choice,
           branchId: branch.id,
-          distanceMiles: distanceMiles(origin.point, branch.location.point),
+          distanceMiles: located,
           evidence: branch.evidence,
+          caveats: branchCaveats,
         });
     }
-    if (!sufficientBranches.some((b) => b.location?.point) || !origin.point)
-      reasons.push(
-        'Closest needs sufficient ready pickup stock, a resolved branch location and origin.',
-      );
+    if (!stockedBranches.some((b) => b.location?.point) || !origin.point)
+      reasons.push('Closest needs a store showing stock, a resolved store address and an origin.');
     const arrival = observed.shipping.arrivalDate;
     if (
       arrival &&
@@ -202,6 +268,10 @@ export function compareOffers(
     cheapest: {
       basis: 'material_subtotal_excludes_tax_freight',
       winners: winners(cheapest, (o) => o.materialSubtotal!),
+      /** Every costed exact offer, lowest first, for a side-by-side price list. */
+      options: [...cheapest].sort(
+        (a, b) => a.materialSubtotal! - b.materialSubtotal! || a.supplier.localeCompare(b.supplier),
+      ),
     },
     closest: {
       basis:
@@ -214,8 +284,18 @@ export function compareOffers(
       basis: 'supplier_estimated_arrival_date',
       winners: winners(shipping, (o) => Date.parse(o.arrivalDate!)),
     },
+    // Every store showing enough stock, nearest first when located, so a tech
+    // can call ahead even when no address was captured for ranking.
+    stockedBranches: [...stocked].sort(
+      (a, b) =>
+        (a.distanceMiles ?? Infinity) - (b.distanceMiles ?? Infinity) ||
+        b.stockQuantity - a.stockQuantity ||
+        a.supplier.localeCompare(b.supplier) ||
+        a.branchId.localeCompare(b.branchId),
+    ),
     excluded,
     limitations: [
+      "Cheapest ranks listed prices; check each winner's caveats for unstated unit, currency, condition or stock.",
       'Winners are limited to verified observations; incomplete supplier coverage can hide a better option.',
       'Product identity does not confirm installed-equipment compatibility.',
       'Shipping dates are supplier estimates; distance is not driving time.',

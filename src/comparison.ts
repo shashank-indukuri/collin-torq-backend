@@ -1,3 +1,4 @@
+import { directoryAddress, johnstoneDirectory } from './johnstone-stores.js';
 import { z } from 'zod';
 import { createHash } from 'node:crypto';
 import { originSchema, resolveLocation, distanceMiles, type GeoResolution } from './geocoding.js';
@@ -84,6 +85,19 @@ export async function buildComparison(
       (offer.commercial?.branches ?? []).map((branch) => ({ offer, branch })),
     ),
   );
+  // Johnstone product pages list stock by store name and number only. Fill the
+  // address from the saved public store list when both number and name match.
+  for (const { offer, branch } of pending) {
+    if (offer.supplier !== 'johnstone') continue;
+    const store = directoryAddress(branch.id, branch.name);
+    if (!store) continue;
+    branch.phone ??= store.phone;
+    if (!branch.address) {
+      const directory = johnstoneDirectory()!;
+      branch.address = store.address;
+      branch.addressSource = { url: directory.sourceUrl, observedAt: directory.observedAt };
+    }
+  }
   const resolveBranch = async ({ offer, branch }: (typeof pending)[number]) => {
     if (!active()) return;
     const cached = store?.getBranch(offer.supplier, branch.id);
@@ -97,7 +111,7 @@ export async function buildComparison(
       branch.location = cached.location;
     else if (
       branch.address &&
-      ((branch.pickupReady === true && branch.stockQuantity !== null && branch.stockQuantity > 0) ||
+      ((branch.stockQuantity !== null && branch.stockQuantity > 0) ||
         offer.supplier === 'johnstone')
     )
       branch.location = await resolveLocation({ address: branch.address });
@@ -177,6 +191,8 @@ export function comparisonView(job: Job, now = Date.now()): Job {
     line.rankings.cheapest.winners = [];
     line.rankings.closest.winners = [];
     line.rankings.fastestShipping.winners = [];
+    line.rankings.stockedBranches = [];
+    line.rankings.cheapest.options = [];
     line.rankings.excluded.push({
       supplier: 'all',
       reasons: ['Commercial evidence expired; refresh required.'],

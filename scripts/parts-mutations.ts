@@ -1,3 +1,4 @@
+import { mutateSource } from './mutation-locate.js';
 import assert from 'node:assert/strict';
 import { readFile, writeFile, rm } from 'node:fs/promises';
 import { randomUUID } from 'node:crypto';
@@ -30,12 +31,13 @@ for (const m of [
     pattern: 'missing cell cannot',
   },
 ]) {
-  assert.ok(source.includes(m.from), `Mutation location changed: ${m.name}`);
+  const mutated_m = mutateSource(source, m.from, m.to);
+  assert.ok(mutated_m !== null, `Mutation location changed: ${m.name}`);
   const suffix = randomUUID();
   const modulePath = `src/.parts-mutant-${suffix}.ts`;
   const testPath = `tests/.parts-mutant-${suffix}.test.ts`;
   try {
-    await writeFile(modulePath, source.replace(m.from, m.to));
+    await writeFile(modulePath, mutated_m!);
     await writeFile(
       testPath,
       suite.replace('../src/parts.js', `../src/.parts-mutant-${suffix}.js`),

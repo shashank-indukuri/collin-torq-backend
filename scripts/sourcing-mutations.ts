@@ -1,3 +1,4 @@
+import { mutateSource } from './mutation-locate.js';
 import assert from 'node:assert/strict';
 import { readFile, writeFile, rm } from 'node:fs/promises';
 import { randomUUID } from 'node:crypto';
@@ -18,12 +19,13 @@ for (const m of [
     pattern: 'supplier failures override no-match',
   },
 ]) {
-  assert.ok(source.includes(m.from), m.name);
+  const mutated_m = mutateSource(source, m.from, m.to);
+  assert.ok(mutated_m !== null, m.name);
   const id = randomUUID();
   const modulePath = `src/.source-mutant-${id}.ts`;
   const testPath = `tests/.source-mutant-${id}.test.ts`;
   try {
-    await writeFile(modulePath, source.replace(m.from, m.to));
+    await writeFile(modulePath, mutated_m!);
     await writeFile(testPath, suite.replace('../src/worker.js', `../src/.source-mutant-${id}.js`));
     const result = await new Promise<{ code: number | null; output: string }>((resolve, reject) => {
       const child = spawn(process.execPath, [
