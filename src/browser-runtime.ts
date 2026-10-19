@@ -33,8 +33,8 @@ export async function closeRecordedBrowser(endpoint:string){
   const socket=new WebSocket(endpoint);let sent=false;
   const timer=setTimeout(()=>{socket.close();reject(new Error('Verified orphan browser did not close in time'));},3000);
   socket.addEventListener('open',()=>{sent=true;socket.send(JSON.stringify({id:1,method:'Browser.close'}));});
-  socket.addEventListener('message',event=>{try{const result=JSON.parse(String(event.data));if(result.id===1){clearTimeout(timer);socket.close();result.error?reject(new Error('Orphan browser close rejected')):resolve();}}catch{/* Ignore unrelated protocol notifications. */}});
-  socket.addEventListener('close',()=>{clearTimeout(timer);sent?resolve():reject(new Error('Orphan browser connection closed before request'));});
+  socket.addEventListener('message',event=>{try{const result=JSON.parse(String(event.data));if(result.id===1){clearTimeout(timer);socket.close();if(result.error)reject(new Error('Orphan browser close rejected'));else resolve();}}catch{/* Ignore unrelated protocol notifications. */}});
+  socket.addEventListener('close',()=>{clearTimeout(timer);if(sent)resolve();else reject(new Error('Orphan browser connection closed before request'));});
   socket.addEventListener('error',()=>{clearTimeout(timer);reject(new Error('Could not close verified orphan browser'));});
  });
 }

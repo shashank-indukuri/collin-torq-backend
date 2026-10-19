@@ -1,5 +1,5 @@
 import {createHash} from 'node:crypto';
-import {startAlternativeReview,alternativeReviewSchema} from './alternatives.js';
+import {startAlternativeReview} from './alternatives.js';
 import {loginSupplier,loginSchema,credentialSuppliers,supplierSession} from './auth.js';
 import {startCapturedSourcing,sourcingRequestSchema} from './sourcing.js';
 import {captureParts,captureRequestSchema,CaptureError} from './capture.js';

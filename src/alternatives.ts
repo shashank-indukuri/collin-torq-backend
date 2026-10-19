@@ -6,7 +6,7 @@ import {getBrowser,saveEvidence} from './browser.js';
 import {config} from './config.js';
 import {normalizePart,type Offer} from './domain.js';
 import {CaptureError} from './capture.js';
-import type {Store,Job,SupplierAttempt} from './store.js';
+import type {Store,SupplierAttempt} from './store.js';
 import {lookup,SupplierError} from './suppliers.js';
 
 export const alternativeReviewSchema=z.object({expectedUpdatedAt:z.iso.datetime(),allow:z.literal(true),installedVoltageVac:z.number().positive().max(1000).optional()}).strict();

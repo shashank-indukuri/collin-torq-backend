@@ -11,7 +11,7 @@ async function phase(crash:boolean){
   child=spawn(process.execPath,['--import','tsx','--input-type=module','-e',code],{cwd:directory,env:{...process.env,CHROME_PORT:String(port),HEADLESS:'true'},stdio:['ignore','pipe','pipe']});
   let output='';let ready=false;const timer=setTimeout(()=>{child?.kill('SIGKILL');reject(new Error('Isolated browser restart phase timed out'));},45000);
   child.stdout!.on('data',b=>{output+=b;if(output.includes('TORQ_READY')&&!ready){ready=true;if(crash)child!.kill('SIGKILL');}});child.stderr!.on('data',b=>output+=b);
-  child.on('error',reject);child.on('close',(code,signal)=>{clearTimeout(timer);ready&&(crash?signal==='SIGKILL':code===0)?resolve():reject(new Error('Isolated browser phase failed: '+output.slice(-4000)));});
+  child.on('error',reject);child.on('close',(code,signal)=>{clearTimeout(timer);if(ready&&(crash?signal==='SIGKILL':code===0))resolve();else reject(new Error('Isolated browser phase failed: '+output.slice(-4000)));});
  });
 }
 try{

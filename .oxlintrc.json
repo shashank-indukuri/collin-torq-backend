@@ -1,0 +1,15 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["typescript", "import", "node"],
+  "categories": {
+    "correctness": "error"
+  },
+  "rules": {
+    "no-unsafe-finally": "warn"
+  },
+  "env": {
+    "node": true,
+    "es2024": true
+  },
+  "ignorePatterns": ["node_modules/**", "dist/**", "python/**", "public/**"]
+}

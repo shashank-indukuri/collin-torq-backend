@@ -2,7 +2,7 @@ import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {assess,inputSchema,type Offer} from '../src/domain.js';
 import {fixtureOffer} from '../src/fixture.js';
-import {compareOffers,type CommercialObservation} from '../src/comparison-policy.js';
+import {compareOffers} from '../src/comparison-policy.js';
 import {resolveLocation,distanceMiles,censusMatch,originSchema,type GeoResolution} from '../src/geocoding.js';
 import {startComparison,comparisonView,buildComparison} from '../src/comparison.js';
 import {parseCommercial,parseArrival,parseGraingerBranches,requestedSpecConflicts} from '../src/commercial.js';

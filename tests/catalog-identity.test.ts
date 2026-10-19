@@ -24,7 +24,7 @@ test('wrong product, recommendations, unreadable layout and wrong manufacturer c
 });
 test('request values are serialized as data inside the application-owned verifier',()=>{
  const sandbox={document:{body:{innerText:bodies.johnstone}},attacked:false};
- const script=productIdentityScript('www.johnstonesupply.com','\");attacked=true;//','York');
+ const script=productIdentityScript('www.johnstonesupply.com','");attacked=true;//','York');
  assert.equal(runInNewContext('('+script+')()',sandbox).matched,false);assert.equal(sandbox.attacked,false);
 });
 test('a product navigation with no body yet remains unmatched and can be polled again',()=>{
