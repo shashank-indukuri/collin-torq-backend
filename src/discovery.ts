@@ -3,7 +3,7 @@ import { lookup } from 'node:dns/promises';
 import { isIP } from 'node:net';
 import { request } from 'node:https';
 import { z } from 'zod';
-import { getBrowser, saveEvidence } from './browser.js';
+import { closeBrowser, getBrowser, saveEvidence } from './browser.js';
 import { modelClient } from './model.js';
 export type WebDocument = {
   url: string;
@@ -69,6 +69,12 @@ export async function publicUrl(raw: string) {
     throw new Error('DISCOVERY_PRIVATE_ADDRESS_DENIED');
   return { url, addresses };
 }
+export function pinnedLookup(a: { address: string; family: number }) {
+  return (_hostname: string, options: { all?: boolean }, callback: (...args: any[]) => void) => {
+    if (options?.all) callback(null, [{ address: a.address, family: a.family }]);
+    else callback(null, a.address, a.family);
+  };
+}
 /** Pin the validated DNS answer for the actual connection, including each redirect. */
 export async function downloadPublicPdf(raw: string, redirects = 0): Promise<Buffer> {
   if (redirects > 3) throw new Error('GUIDE_REDIRECT_LIMIT');
@@ -77,10 +83,9 @@ export async function downloadPublicPdf(raw: string, redirects = 0): Promise<Buf
     const req = request(
       url,
       {
-        lookup: (_hostname, _options, callback) => {
-          const a = addresses[0]!;
-          callback(null, a.address, a.family);
-        },
+        // Answer only with the validated address. Node 22 may request the
+        // all-addresses form (happy eyeballs); return the same pinned entry.
+        lookup: pinnedLookup(addresses[0]!),
         headers: { Accept: 'application/pdf' },
         timeout: 30000,
       },
@@ -124,7 +129,21 @@ export async function downloadPublicPdf(raw: string, redirects = 0): Promise<Buf
     req.end();
   });
 }
+const deadTab = (e: unknown) =>
+  e instanceof Error &&
+  /Session with given id not found|Target closed|has been closed/i.test(e.message);
 export async function readWebDocument(raw: string, jobId?: string): Promise<WebDocument> {
+  try {
+    return await readOnce(raw, jobId);
+  } catch (error) {
+    // A tab an earlier job closed can leave a stale browser session behind.
+    // Reset the connection and read the same public page once more.
+    if (!deadTab(error)) throw error;
+    await closeBrowser().catch(() => {});
+    return readOnce(raw, jobId);
+  }
+}
+async function readOnce(raw: string, jobId?: string): Promise<WebDocument> {
   await publicUrl(raw);
   const sh = await getBrowser();
   const page = await sh.browser.context.newPage();
@@ -155,9 +174,29 @@ export async function readWebDocument(raw: string, jobId?: string): Promise<WebD
     await page.close().catch(() => {});
   }
 }
+/**
+ * Bing result links are click-tracking redirects: /ck/a?...&u=a1<base64url>.
+ * Decode them to the real destination so a PDF result is recognized as a PDF.
+ * Anything that does not decode to an https URL is returned unchanged.
+ */
+export function unwrapSearchLink(raw: string): string {
+  try {
+    const url = new URL(raw);
+    if (!/(^|\.)bing\.com$/.test(url.hostname) || !url.pathname.startsWith('/ck/a')) return raw;
+    const u = url.searchParams.get('u');
+    if (!u?.startsWith('a1')) return raw;
+    const target = Buffer.from(u.slice(2).replace(/-/g, '+').replace(/_/g, '/'), 'base64').toString(
+      'utf8',
+    );
+    return new URL(target).protocol === 'https:' ? target : raw;
+  } catch {
+    return raw;
+  }
+}
 export async function searchWeb(query: string): Promise<WebDocument> {
   // Search is an entry point, not a supplier-specific result selector or parser.
-  return readWebDocument('https://www.bing.com/search?q=' + encodeURIComponent(query));
+  const doc = await readWebDocument('https://www.bing.com/search?q=' + encodeURIComponent(query));
+  return { ...doc, links: doc.links.map((l) => ({ ...l, url: unwrapSearchLink(l.url) })) };
 }
 export async function chooseLinks(document: WebDocument, goal: string, limit = 3) {
   const selection = await structured(

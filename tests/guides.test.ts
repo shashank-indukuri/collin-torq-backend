@@ -357,3 +357,68 @@ test('cancellation during a guide download cannot be overwritten by a later succ
       store.db.close();
     }
   }));
+
+test('a guide listing only the base model asks the tech to confirm; a different model is an explained miss', async () => {
+  const { resolveGeneralGuide } = await import('../src/general-guides.js');
+  // Text mirrors the real Mitsubishi OBB962A catalog (2026-10-19 live run).
+  const pages = [
+    {
+      page: 1,
+      text: 'OUTDOOR UNIT PARTS CATALOG\nModels\nMXZ-2D20NL   - CA1\nMXZ-5D36NL   - CA1\nMXZ-5D42NL   - CA1',
+    },
+    {
+      page: 2,
+      text: 'No. Part No. Part Name MXZ-5D36NL - CA1\n4 U01 B10 451 OUTDOOR CONTROL P.C. BOARD 1',
+    },
+    { page: 3, text: '© Copyright 2025 MITSUBISHI ELECTRIC CORPORATION' },
+  ];
+  const analysis = (model: string) => ({
+    manufacturer: 'Mitsubishi Electric',
+    manufacturerEvidence: { page: 3, text: '© Copyright 2025 MITSUBISHI ELECTRIC CORPORATION' },
+    title: 'OUTDOOR UNIT PARTS CATALOG',
+    documentNumber: 'not stated',
+    revision: 'not stated',
+    models: [
+      {
+        model,
+        evidence: {
+          page: 1,
+          text: 'Models\nMXZ-2D20NL   - CA1\nMXZ-5D36NL   - CA1\nMXZ-5D42NL   - CA1',
+        },
+      },
+    ],
+    warnings: [],
+  });
+  const dir = await mkdtemp(join(tmpdir(), 'general-guide-'));
+  try {
+    const deps = (model: string) => ({
+      discover: async () => ['https://example.com/catalog.pdf'],
+      download: async () => Buffer.from('%PDF-1.4\n' + model),
+      extractPdf: async () => pages,
+      analyze: async () => analysis(model) as any,
+    });
+    const family = await resolveGeneralGuide(
+      dir,
+      { manufacturer: 'Mitsubishi', model: 'MXZ-5D36NL-U1' },
+      deps('MXZ-5D36NL'),
+    );
+    assert.equal(family.status, 'needs_model_confirmation');
+    assert.ok(family.guide);
+    // Live 2026-10-19: the model returned only the first models on the list page.
+    const partial = await resolveGeneralGuide(
+      dir,
+      { manufacturer: 'Mitsubishi', model: 'MXZ-5D36NL-U1' },
+      deps('MXZ-2D20NL'),
+    );
+    assert.equal(partial.status, 'needs_model_confirmation', 'read from the model-list page');
+    const other = await resolveGeneralGuide(
+      dir,
+      { manufacturer: 'Mitsubishi', model: 'MXZ-3D24NL-U1' },
+      deps('MXZ-5D42NL'),
+    );
+    assert.equal(other.status, 'not_found');
+    assert.match(other.attempts.at(-1)!.detail, /not MXZ-3D24NL-U1/);
+  } finally {
+    await rm(dir, { recursive: true, force: true });
+  }
+});

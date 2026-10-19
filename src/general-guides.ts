@@ -38,14 +38,24 @@ export type GeneralGuideDependencies = {
   extractPdf?: (path: string) => Promise<Pages>;
   analyze?: (pages: Pages, request: GuideRequest) => Promise<Analysis>;
 };
-const key = (s: string) => s.toLowerCase().replace(/[^a-z0-9]/g, '');
 const literal = (quoteText: string, text: string) =>
   text.replace(/\s+/g, ' ').toLowerCase().includes(quoteText.replace(/\s+/g, ' ').toLowerCase());
+/**
+ * "Mitsubishi" requested and "Mitsubishi Electric" printed are one brand: the
+ * guide's name must START with the requested brand as a whole word. Different
+ * brands, or a requested name longer than the printed one, still fail.
+ */
+export function sameBrand(printed: string, requested: string) {
+  const words = (v: string) => v.toLowerCase().match(/[a-z0-9]+/g) ?? [];
+  const p = words(printed),
+    r = words(requested);
+  return r.length > 0 && r.length <= p.length && r.every((w, i) => p[i] === w);
+}
 export function validateGuideAnalysis(raw: Analysis, pages: Pages, request: GuideRequest) {
   const analysis = generalGuideAnalysis.parse(raw);
   const page = (n: number) => pages.find((p) => p.page === n)?.text ?? '';
   if (
-    key(analysis.manufacturer) !== key(request.manufacturer) ||
+    !sameBrand(analysis.manufacturer, request.manufacturer) ||
     !literal(analysis.manufacturerEvidence.text, page(analysis.manufacturerEvidence.page)) ||
     !literal(analysis.manufacturer, analysis.manufacturerEvidence.text)
   )
@@ -61,7 +71,26 @@ export function validateGuideAnalysis(raw: Analysis, pages: Pages, request: Guid
   if (!models.length) throw new Error('GUIDE_MODEL_COVERAGE_UNVERIFIED');
   return { ...analysis, models };
 }
-async function extractPdf(path: string): Promise<Pages> {
+/**
+ * The model's list of covered models can be partial. Read the requested model
+ * (or its base model, the part before a trailing "-SUFFIX") straight from the
+ * page text of the guide's own validated model-list pages, as a whole token.
+ */
+export function listedOnModelPages(
+  analysis: { models: { evidence: { page: number } }[] },
+  pages: Pages,
+  model: string,
+) {
+  const listPages = new Set(analysis.models.map((m) => m.evidence.page));
+  const tokens = pages
+    .filter((p) => listPages.has(p.page))
+    .flatMap((p) => p.text.match(/[A-Za-z0-9]+(?:[.-][A-Za-z0-9]+)*/g) ?? [])
+    .map((t) => normalizeModel(t));
+  const found = new Set<string>();
+  for (const t of tokens) if (t === model || (t.length >= 6 && model.startsWith(t))) found.add(t);
+  return [...found];
+}
+export async function extractPdf(path: string): Promise<Pages> {
   const { stdout } = await promisify(execFile)(
     resolve('.venv/bin/python'),
     [resolve('python/read_guide.py'), path],
@@ -106,21 +135,30 @@ async function discover(request: GuideRequest) {
   }
   return [...new Set(urls)].slice(0, 4);
 }
-async function analyze(pages: Pages, request: GuideRequest) {
+export async function analyze(pages: Pages, request: GuideRequest) {
   // Keep complete selected pages: do not truncate table rows midway and then infer alignment.
-  const selected = pages
-    .filter(
-      (p) =>
-        p.page === 1 ||
-        p.text.toUpperCase().includes(request.model.toUpperCase()) ||
-        /model|parts list/i.test(p.text),
-    )
-    .slice(0, 10);
+  // The brand is often printed once, on the back cover; send that page too so
+  // the manufacturer can be quoted rather than guessed.
+  const brand = pages.find(
+    (p) => p.page !== 1 && p.text.toLowerCase().includes(request.manufacturer.toLowerCase()),
+  );
+  const selected = [
+    ...pages
+      .filter(
+        (p) =>
+          p.page === 1 ||
+          p.text.toUpperCase().includes(request.model.toUpperCase()) ||
+          /model|parts list/i.test(p.text),
+      )
+      .filter((p) => p !== brand)
+      .slice(0, brand ? 9 : 10),
+    ...(brand ? [brand] : []),
+  ];
   let size = 0;
   const bounded = selected.filter((p) => (size += p.text.length) <= 44000);
   return structured(
     generalGuideAnalysis,
-    'Identify the manufacturer and EXPLICIT applicable full model listings in this parts guide. Each model needs a literal page quote containing its model token and an applicability/table/title heading. Incidental mentions and replacement examples are not coverage. Include manufacturer evidence. Do not invent suffixes. Return empty models if applicability is uncertain. Document metadata unavailable in the pages must be "not stated". Preserve warnings about serial ranges, revisions and missing pages.',
+    'Identify the manufacturer and list EVERY model this parts guide explicitly lists as covered (title page model list or parts-table model columns), copied exactly as printed, even when it differs from the requested model; the backend decides which one applies. Each model needs a literal page quote containing its model token and the list/table heading. Incidental mentions and replacement examples are not coverage. manufacturerEvidence.text must be a short literal quote that itself contains the manufacturer name exactly as printed (for example a copyright line or company name), never a generic title. Do not invent suffixes. Return empty models only when the guide lists no models. Document metadata unavailable in the pages must be "not stated". Preserve warnings about serial ranges, revisions and missing pages.',
     { requested: request, pages: bounded },
   );
 }
@@ -164,8 +202,18 @@ export async function resolveGeneralGuide(
   };
   const apply = (saved: z.infer<typeof manifestSchema>, pages: Pages) => {
     const a = validateGuideAnalysis(saved.analysis, pages, requested);
-    const coveredModels = [...new Set(a.models.map((m) => normalizeModel(m.model)))],
-      matchingModels = coveredModels.filter((m) => m === model || m.startsWith(model));
+    const coveredModels = [
+        ...new Set([
+          ...a.models.map((m) => normalizeModel(m.model)),
+          ...listedOnModelPages(a, pages, model),
+        ]),
+      ],
+      // A requested prefix matches longer listed models; a listed base model
+      // (e.g. MXZ5D36NL for MXZ5D36NLU1) is a family match that needs the tech
+      // to confirm the suffix, never an exact match.
+      matchingModels = coveredModels.filter(
+        (m) => m === model || m.startsWith(model) || (m.length >= 6 && model.startsWith(m)),
+      );
     if (!matchingModels.length) return false;
     const exact = coveredModels.includes(model);
     const declared = Math.max(
@@ -267,7 +315,14 @@ export async function resolveGeneralGuide(
           retrievedAt: new Date().toISOString(),
           analysis,
         });
-        if (!apply(saved, pages)) continue;
+        if (!apply(saved, pages)) {
+          result.attempts.push({
+            door: 'candidate_pdf',
+            status: 'miss',
+            detail: `${url} lists ${[...new Set(analysis.models.map((m) => m.model))].slice(0, 6).join(', ') || 'no models'}, not ${requested.model}.`,
+          });
+          continue;
+        }
         const temp = join(directory, randomUUID() + '.tmp');
         await writeFile(temp, JSON.stringify(saved), { mode: 0o600 });
         await rename(temp, join(directory, sha256 + '.general.json'));
@@ -276,7 +331,7 @@ export async function resolveGeneralGuide(
         result.attempts.push({
           door: 'candidate_pdf',
           status: 'error',
-          detail: error instanceof Error ? error.message : 'Guide validation failed',
+          detail: `${error instanceof Error ? error.message : 'Guide validation failed'} · ${url}`,
         });
       }
     }
