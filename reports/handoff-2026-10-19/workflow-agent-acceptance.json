@@ -1,0 +1,23 @@
+{
+  "result": {
+    "successful": true,
+    "agentReportedSuccess": true,
+    "result": "Opened the local pickup inventory panel. The page shows Arlington #100 with Quantity Available: 3.",
+    "toolNames": [
+      "done",
+      "read_document",
+      "click_or_fill_control"
+    ],
+    "executed": [
+      {
+        "operation": "click",
+        "index": 0,
+        "url": "http://127.0.0.1:4312/"
+      }
+    ]
+  },
+  "actual": {
+    "visible": true,
+    "cartTouched": false
+  }
+}

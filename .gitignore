@@ -1,0 +1,26 @@
+# Per-machine secrets and runtime state
+.env
+.env.*
+!.env.example
+.local/
+.playwright-cli/
+*.sqlite
+*.sqlite-*
+*.db
+*.db-*
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Rebuild dependencies on each machine
+node_modules/
+.venv/
+dist/
+__pycache__/
+*.pyc
+
+# OS/editor output
+.DS_Store
+*.log
+coverage/

@@ -1,0 +1,60 @@
+{
+  "passed": true,
+  "cases": [
+    {
+      "name": "prefix ambiguity",
+      "status": 200,
+      "outcome": "needs_model_confirmation"
+    },
+    {
+      "name": "exact guide coverage",
+      "status": 200,
+      "outcome": "guide_found"
+    },
+    {
+      "name": "wrong suffix",
+      "status": 200,
+      "outcome": "not_found"
+    },
+    {
+      "name": "unsupported manufacturer",
+      "status": 200,
+      "outcome": "not_found"
+    },
+    {
+      "name": "invalid quantity rejected before supplier work",
+      "status": 400,
+      "outcome": "VALIDATION_ERROR"
+    },
+    {
+      "name": "stale captured handoff rejected",
+      "status": 409,
+      "outcome": "STALE_CAPTURE"
+    },
+    {
+      "name": "alternative review blocked before complete exact sourcing",
+      "status": 409,
+      "outcome": "CAPTURED_EXACT_SEARCH_REQUIRED"
+    },
+    {
+      "name": "unsafe generic alternative path cannot bypass captured specifications",
+      "status": 409,
+      "outcome": "ALTERNATIVE_SPECIFICATIONS_UNVERIFIED"
+    },
+    {
+      "name": "repeated consent reuses review without re-running suppliers",
+      "status": 200
+    },
+    {
+      "name": "conflicting replay cannot change specifications",
+      "status": 409,
+      "outcome": "ALTERNATIVE_REVIEW_CONFLICT"
+    },
+    {
+      "name": "nested comparison rejected",
+      "status": 409,
+      "outcome": "SOURCING_RESULTS_REQUIRED"
+    }
+  ],
+  "modelCalls": 0
+}

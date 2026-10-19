@@ -1,0 +1,92 @@
+{
+  "passed": true,
+  "startedAt": "2026-10-19T00:03:05.805Z",
+  "engine": "legacy",
+  "cases": [
+    {
+      "name": "UI \u2192 prefix clarification \u2192 real cached PDF \u2192 component selection \u2192 capture",
+      "jobId": "74a89e17-2ac4-4154-9e88-4e251e30910b"
+    },
+    {
+      "name": "captured source \u2192 three suppliers \u00d7 two lines, immutable parent, no automatic alternatives",
+      "jobId": "b2f8d829-5f26-4ad5-85f8-ddf28dea1885",
+      "evidenceFiles": 6,
+      "execution": {
+        "provider": "openai",
+        "model": "gpt-6-luna",
+        "supplierEngine": "legacy",
+        "startedAt": "2026-10-19T00:03:13.239Z"
+      }
+    },
+    {
+      "name": "fresh comparison and immutable exact source",
+      "jobId": "d713547e-83a1-40e1-9d70-14ee48c2d81e",
+      "status": "needs_verification",
+      "evidenceFiles": 9,
+      "categories": [
+        {
+          "name": "Control, Defrost",
+          "cheapest": 0,
+          "closest": 0,
+          "arrival": 1,
+          "missing": [
+            {
+              "supplier": "johnstone",
+              "reasons": [
+                "Cheapest needs USD purchase units, new condition and sufficient evidenced quantity; tax/freight are excluded.",
+                "Closest needs sufficient ready pickup stock, a resolved branch location and origin.",
+                "Fastest needs a future arrival date for the requested quantity and destination ZIP; dispatch text is insufficient."
+              ]
+            },
+            {
+              "supplier": "partstown",
+              "reasons": [
+                "Cheapest needs USD purchase units, new condition and sufficient evidenced quantity; tax/freight are excluded.",
+                "Closest needs sufficient ready pickup stock, a resolved branch location and origin.",
+                "Fastest needs a future arrival date for the requested quantity and destination ZIP; dispatch text is insufficient."
+              ]
+            },
+            {
+              "supplier": "grainger",
+              "reasons": [
+                "Cheapest needs USD purchase units, new condition and sufficient evidenced quantity; tax/freight are excluded.",
+                "Closest needs sufficient ready pickup stock, a resolved branch location and origin."
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Capacitor, Run  (40/5MFD)            [RC]",
+          "cheapest": 0,
+          "closest": 0,
+          "arrival": 0,
+          "missing": []
+        }
+      ]
+    },
+    {
+      "name": "explicit UI consent \u2192 documented alternative review \u2192 unchanged capture/exact results",
+      "jobId": "d713547e-83a1-40e1-9d70-14ee48c2d81e",
+      "evidenceFiles": 20,
+      "candidates": [
+        {
+          "number": "S1-02425893700",
+          "verification": "needs_review",
+          "offers": 2
+        },
+        {
+          "number": "S1-CAP4405040DR",
+          "verification": "needs_review",
+          "offers": 1
+        }
+      ]
+    },
+    {
+      "name": "actual API/browser shutdown and restart preserves review, capture, exact results and evidence",
+      "jobId": "d713547e-83a1-40e1-9d70-14ee48c2d81e",
+      "evidenceFiles": 20
+    }
+  ],
+  "commercialComplete": false,
+  "jobId": "d713547e-83a1-40e1-9d70-14ee48c2d81e"
+}

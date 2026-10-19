@@ -1,0 +1,5 @@
+{
+  "passed": true,
+  "jobs": 3,
+  "contractUrl": "http://127.0.0.1:4310/api/openapi.json"
+}

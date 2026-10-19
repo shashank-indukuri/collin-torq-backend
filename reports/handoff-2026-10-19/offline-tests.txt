@@ -1,0 +1,1208 @@
+
+> torq-local-backend@1.0.0 test
+> tsx --test tests/*.test.ts
+
+TAP version 13
+# Subtest: no-match evidence is bound to the actual query even when the page omits the identifier
+ok 1 - no-match evidence is bound to the actual query even when the page omits the identifier
+  ---
+  duration_ms: 2.892542
+  type: 'test'
+  ...
+# Subtest: repeated clicks cannot evade the page-state guard through irrelevant argument changes
+ok 2 - repeated clicks cannot evade the page-state guard through irrelevant argument changes
+  ---
+  duration_ms: 0.432667
+  type: 'test'
+  ...
+# Subtest: semantic facts require actual page quotes and exact numeric evidence; dollars cannot become USD
+ok 3 - semantic facts require actual page quotes and exact numeric evidence; dollars cannot become USD
+  ---
+  duration_ms: 0.203667
+  type: 'test'
+  ...
+# Subtest: branch inventory cannot borrow an unrelated numeric occurrence or a different branch identity
+ok 4 - branch inventory cannot borrow an unrelated numeric occurrence or a different branch identity
+  ---
+  duration_ms: 0.148042
+  type: 'test'
+  ...
+# Subtest: semantic actions can fill task values on unknown layouts but cannot buy, change accounts or leave the supplier
+ok 5 - semantic actions can fill task values on unknown layouts but cannot buy, change accounts or leave the supplier
+  ---
+  duration_ms: 0.316292
+  type: 'test'
+  ...
+# Subtest: goal agent preserves discovered numeric branch stock without inventing pickup promises or condition
+ok 6 - goal agent preserves discovered numeric branch stock without inventing pickup promises or condition
+  ---
+  duration_ms: 1.987625
+  type: 'test'
+  ...
+# (node:66044) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: replacement claim requires the exact old identifier inside an explicit replacement list on the reviewed supplier source
+ok 7 - replacement claim requires the exact old identifier inside an explicit replacement list on the reviewed supplier source
+  ---
+  duration_ms: 1.954416
+  type: 'test'
+  ...
+# Subtest: OEM specifications must belong to the candidate SKU and primary heading, never recommendations
+ok 8 - OEM specifications must belong to the candidate SKU and primary heading, never recommendations
+  ---
+  duration_ms: 19.640167
+  type: 'test'
+  ...
+# Subtest: voltage/capacitance conflicts reject candidates; supplier claims and unknowns can never approve installation
+ok 9 - voltage/capacitance conflicts reject candidates; supplier claims and unknowns can never approve installation
+  ---
+  duration_ms: 0.639333
+  type: 'test'
+  ...
+# Subtest: review permission is scoped, stale-safe and idempotent; caller cannot inject candidate destinations
+ok 10 - review permission is scoped, stale-safe and idempotent; caller cannot inject candidate destinations
+  ---
+  duration_ms: 10.73925
+  type: 'test'
+  ...
+# Subtest: an unresolved exact supplier error cannot be misrepresented as permission to search alternatives
+ok 11 - an unresolved exact supplier error cannot be misrepresented as permission to search alternatives
+  ---
+  duration_ms: 1.866541
+  type: 'test'
+  ...
+# Subtest: documented candidate supplier checks preserve original capture/results and cannot become exact or rankable
+ok 12 - documented candidate supplier checks preserve original capture/results and cannot become exact or rankable
+  ---
+  duration_ms: 36.842792
+  type: 'test'
+  ...
+# Subtest: a reported 440 V installation skips all supplier operations for the rejected 370 V candidate
+ok 13 - a reported 440 V installation skips all supplier operations for the rejected 370 V candidate
+  ---
+  duration_ms: 7.733708
+  type: 'test'
+  ...
+# Subtest: alternative recovery failures retain failed-navigation evidence and cannot become no-match
+# {"level":30,"time":1792417662144,"pid":66044,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-1","req":{"method":"POST","url":"/api/searches/20a245d8-0e36-43bb-b0bd-99ac441174e6/alternatives/review","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+ok 14 - alternative recovery failures retain failed-navigation evidence and cannot become no-match
+  ---
+  duration_ms: 12.460708
+  type: 'test'
+  ...
+# Subtest: reference failure stops supplier lookup and an individual supplier error produces partial review
+ok 15 - reference failure stops supplier lookup and an individual supplier error produces partial review
+  ---
+  duration_ms: 24.23025
+  type: 'test'
+  ...
+# Subtest: cancellation while reading references prevents supplier checks and later state writes
+ok 16 - cancellation while reading references prevents supplier checks and later state writes
+  ---
+  duration_ms: 4.14825
+  type: 'test'
+  ...
+# {"level":30,"time":1792417662154,"pid":66044,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-1","res":{"statusCode":202},"responseTime":9.313834000000043,"msg":"request completed"}
+# {"level":30,"time":1792417662178,"pid":66044,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-2","req":{"method":"GET","url":"/api/searches/20a245d8-0e36-43bb-b0bd-99ac441174e6/alternative-references/354d35cbb590ef476d309b8d83f1f71a21acc633841edadd1b85d51d7fff83fd","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662202,"pid":66044,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-2","res":{"statusCode":200},"responseTime":24.234333000000106,"msg":"request completed"}
+# {"level":30,"time":1792417662206,"pid":66044,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-3","req":{"method":"GET","url":"/api/searches/20a245d8-0e36-43bb-b0bd-99ac441174e6/alternative-references/354d35cbb590ef476d309b8d83f1f71a21acc633841edadd1b85d51d7fff83fd","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662209,"pid":66044,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-3","res":{"statusCode":409},"responseTime":3.0830000000000837,"msg":"request completed"}
+# {"level":30,"time":1792417662209,"pid":66044,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-4","req":{"method":"GET","url":"/api/searches/20a245d8-0e36-43bb-b0bd-99ac441174e6/alternative-references/cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662210,"pid":66044,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-4","res":{"statusCode":404},"responseTime":0.4178749999998672,"msg":"request completed"}
+# {"level":30,"time":1792417662213,"pid":66044,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-5","req":{"method":"GET","url":"/api/searches/20a245d8-0e36-43bb-b0bd-99ac441174e6/evidence/reference-reference-reference-reference-reference-reference-reference-reference-reference-reference-reference-reference-reference-reference-reference-proof.png","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662214,"pid":66044,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-5","res":{"statusCode":200},"responseTime":1.1027500000000146,"msg":"request completed"}
+# Subtest: review API is queued without changing exact input; reference endpoint verifies content integrity
+ok 17 - review API is queued without changing exact input; reference endpoint verifies content integrity
+  ---
+  duration_ms: 240.425167
+  type: 'test'
+  ...
+# Subtest: OEM substitute edges form a directed complete chain and cannot erase weaker supplier evidence
+ok 18 - OEM substitute edges form a directed complete chain and cannot erase weaker supplier evidence
+  ---
+  duration_ms: 0.259875
+  type: 'test'
+  ...
+# Subtest: reviewed alphanumeric Source 1 SKU is an identity alias only for the same exact documented York part
+ok 19 - reviewed alphanumeric Source 1 SKU is an identity alias only for the same exact documented York part
+  ---
+  duration_ms: 0.123167
+  type: 'test'
+  ...
+# Subtest: reference cache retains observed date, marks stale-live status and rejects altered, old or wrong-SKU snapshots
+ok 20 - reference cache retains observed date, marks stale-live status and rejects altered, old or wrong-SKU snapshots
+  ---
+  duration_ms: 7.223
+  type: 'test'
+  ...
+# Subtest: alternative review reauthenticates expired supplier sessions once per supplier and preserves exact results
+ok 21 - alternative review reauthenticates expired supplier sessions once per supplier and preserves exact results
+  ---
+  duration_ms: 5.962
+  type: 'test'
+  ...
+# Subtest: cancellation during alternative credential lookup prevents sign-in and subsequent supplier operations
+ok 22 - cancellation during alternative credential lookup prevents sign-in and subsequent supplier operations
+  ---
+  duration_ms: 4.689458
+  type: 'test'
+  ...
+# (node:66045) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: published job contract accepts extended offers and runtime metadata, and rejects invalid currency
+ok 23 - published job contract accepts extended offers and runtime metadata, and rejects invalid currency
+  ---
+  duration_ms: 87.062792
+  type: 'test'
+  ...
+# (node:66046) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: local supplier credentials require a private file and fail closed when missing or malformed
+ok 24 - local supplier credentials require a private file and fail closed when missing or malformed
+  ---
+  duration_ms: 31.151709
+  type: 'test'
+  ...
+# Subtest: AUTH_REQUIRED signs in once and retries the same exact supplier query once
+ok 25 - AUTH_REQUIRED signs in once and retries the same exact supplier query once
+  ---
+  duration_ms: 15.475792
+  type: 'test'
+  ...
+# Subtest: failed automatic sign-in does not retry the supplier query or expose credentials
+ok 26 - failed automatic sign-in does not retry the supplier query or expose credentials
+  ---
+  duration_ms: 12.494792
+  type: 'test'
+  ...
+# Subtest: owned browser startup retries transient readiness failures
+ok 27 - owned browser startup retries transient readiness failures
+  ---
+  duration_ms: 205.604125
+  type: 'test'
+  ...
+# Subtest: owned browser startup preserves non-transient failures and deadlines
+ok 28 - owned browser startup preserves non-transient failures and deadlines
+  ---
+  duration_ms: 1.205083
+  type: 'test'
+  ...
+# Subtest: only the same recorded application browser instance can be reconnected
+ok 29 - only the same recorded application browser instance can be reconnected
+  ---
+  duration_ms: 1.54975
+  type: 'test'
+  ...
+# Subtest: unknown or changed runtime records cannot attach to an occupied port
+ok 30 - unknown or changed runtime records cannot attach to an occupied port
+  ---
+  duration_ms: 9.521292
+  type: 'test'
+  ...
+# (node:66048) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# {"level":30,"time":1792417661900,"pid":66048,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-1","req":{"method":"POST","url":"/api/searches","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417661944,"pid":66048,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-1","res":{"statusCode":202},"responseTime":42.963040999999976,"msg":"request completed"}
+# {"level":30,"time":1792417661957,"pid":66048,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-2","req":{"method":"POST","url":"/api/searches/675fb9fc-d697-46a3-b754-678bc89eefa0/capture","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417661964,"pid":66048,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-2","res":{"statusCode":200},"responseTime":6.023040999999921,"msg":"request completed"}
+# {"level":30,"time":1792417661965,"pid":66048,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-3","req":{"method":"POST","url":"/api/searches/675fb9fc-d697-46a3-b754-678bc89eefa0/capture","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417661965,"pid":66048,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-3","res":{"statusCode":200},"responseTime":0.515999999999849,"msg":"request completed"}
+# {"level":30,"time":1792417661965,"pid":66048,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-4","req":{"method":"POST","url":"/api/searches/675fb9fc-d697-46a3-b754-678bc89eefa0/capture","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417661966,"pid":66048,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-4","res":{"statusCode":409},"responseTime":0.596416999999974,"msg":"request completed"}
+# Subtest: capture selects server-side candidates, preserves unknown specs/evidence and never searches suppliers
+ok 31 - capture selects server-side candidates, preserves unknown specs/evidence and never searches suppliers
+  ---
+  duration_ms: 195.72675
+  type: 'test'
+  ...
+# {"level":30,"time":1792417661974,"pid":66048,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-1","req":{"method":"POST","url":"/api/searches","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417661975,"pid":66048,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-1","res":{"statusCode":202},"responseTime":0.7803750000000491,"msg":"request completed"}
+# {"level":30,"time":1792417661987,"pid":66048,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-2","req":{"method":"POST","url":"/api/searches/3470cef4-5fbd-4904-82fe-31e89c8fe74f/capture","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417661988,"pid":66048,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-2","res":{"statusCode":409},"responseTime":1.037499999999909,"msg":"request completed"}
+# Subtest: missing line selection cannot be captured
+ok 32 - missing line selection cannot be captured
+  ---
+  duration_ms: 25.897958
+  type: 'test'
+  ...
+# {"level":30,"time":1792417662000,"pid":66048,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-1","req":{"method":"POST","url":"/api/searches","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662000,"pid":66048,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-1","res":{"statusCode":202},"responseTime":0.6438339999999698,"msg":"request completed"}
+# {"level":30,"time":1792417662013,"pid":66048,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-2","req":{"method":"POST","url":"/api/searches/2b2243ee-a9ec-46d3-b9c8-8e0267de42d3/capture","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662014,"pid":66048,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-2","res":{"statusCode":409},"responseTime":1.0238329999999678,"msg":"request completed"}
+# Subtest: duplicate line selections cannot be captured
+ok 33 - duplicate line selections cannot be captured
+  ---
+  duration_ms: 20.736459
+  type: 'test'
+  ...
+# {"level":30,"time":1792417662023,"pid":66048,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-1","req":{"method":"POST","url":"/api/searches","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662024,"pid":66048,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-1","res":{"statusCode":202},"responseTime":1.0538749999998345,"msg":"request completed"}
+# {"level":30,"time":1792417662038,"pid":66048,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-2","req":{"method":"POST","url":"/api/searches/a3f205bc-962e-432b-b304-efc2dbea5aec/capture","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662039,"pid":66048,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-2","res":{"statusCode":409},"responseTime":1.3482920000001286,"msg":"request completed"}
+# Subtest: out-of-range candidate cannot be captured
+ok 34 - out-of-range candidate cannot be captured
+  ---
+  duration_ms: 24.88175
+  type: 'test'
+  ...
+# {"level":30,"time":1792417662063,"pid":66048,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-1","req":{"method":"POST","url":"/api/searches","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662065,"pid":66048,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-1","res":{"statusCode":202},"responseTime":1.40625,"msg":"request completed"}
+# {"level":30,"time":1792417662078,"pid":66048,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-2","req":{"method":"POST","url":"/api/searches/e63feef6-eb71-4e68-896a-444726a9e12a/capture","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662080,"pid":66048,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-2","res":{"statusCode":409},"responseTime":2.601957999999968,"msg":"request completed"}
+# Subtest: out-of-range line cannot be captured
+ok 35 - out-of-range line cannot be captured
+  ---
+  duration_ms: 45.121458
+  type: 'test'
+  ...
+# {"level":30,"time":1792417662093,"pid":66048,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-1","req":{"method":"POST","url":"/api/searches","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662093,"pid":66048,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-1","res":{"statusCode":202},"responseTime":0.6482919999998558,"msg":"request completed"}
+# {"level":30,"time":1792417662105,"pid":66048,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-2","req":{"method":"POST","url":"/api/searches/8a624b2f-6805-44b0-9e6f-6984e6611219/capture","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662106,"pid":66048,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-2","res":{"statusCode":409},"responseTime":0.6109160000000884,"msg":"request completed"}
+# Subtest: stale job snapshot cannot be captured
+ok 36 - stale job snapshot cannot be captured
+  ---
+  duration_ms: 22.030833
+  type: 'test'
+  ...
+# {"level":30,"time":1792417662113,"pid":66048,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-1","req":{"method":"POST","url":"/api/searches","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662113,"pid":66048,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-1","res":{"statusCode":202},"responseTime":0.8155829999998332,"msg":"request completed"}
+# {"level":30,"time":1792417662126,"pid":66048,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-2","req":{"method":"POST","url":"/api/searches/7a0af742-60e4-4633-8186-264adf188df0/capture","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662129,"pid":66048,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-2","res":{"statusCode":409},"responseTime":3.3174169999999776,"msg":"request completed"}
+# Subtest: stale guide hash cannot be captured
+ok 37 - stale guide hash cannot be captured
+  ---
+  duration_ms: 23.260833
+  type: 'test'
+  ...
+# {"level":30,"time":1792417662139,"pid":66048,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-1","req":{"method":"POST","url":"/api/searches","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662140,"pid":66048,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-1","res":{"statusCode":202},"responseTime":1.0277920000000904,"msg":"request completed"}
+# {"level":30,"time":1792417662152,"pid":66048,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-2","req":{"method":"POST","url":"/api/searches/d898c3b8-43ed-4930-af60-7c4bacf45eb7/capture","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662153,"pid":66048,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-2","res":{"statusCode":400},"responseTime":0.5862500000000637,"msg":"request completed"}
+# {"level":30,"time":1792417662153,"pid":66048,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-3","req":{"method":"POST","url":"/api/searches/d898c3b8-43ed-4930-af60-7c4bacf45eb7/capture","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662154,"pid":66048,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-3","res":{"statusCode":400},"responseTime":0.5601659999999811,"msg":"request completed"}
+# {"level":30,"time":1792417662154,"pid":66048,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-4","req":{"method":"POST","url":"/api/searches/d898c3b8-43ed-4930-af60-7c4bacf45eb7/capture","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662155,"pid":66048,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-4","res":{"statusCode":400},"responseTime":0.7012919999999667,"msg":"request completed"}
+# Subtest: capture rejects supplied identifiers/specs instead of trusting client values
+ok 38 - capture rejects supplied identifiers/specs instead of trusting client values
+  ---
+  duration_ms: 26.411375
+  type: 'test'
+  ...
+# {"level":30,"time":1792417662167,"pid":66048,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-1","req":{"method":"POST","url":"/api/searches","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662168,"pid":66048,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-1","res":{"statusCode":202},"responseTime":1.2247919999999795,"msg":"request completed"}
+# {"level":30,"time":1792417662180,"pid":66048,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-2","req":{"method":"POST","url":"/api/searches/0c65e0c9-8eb1-4c87-adba-b5a70d327eee/capture","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662181,"pid":66048,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-2","res":{"statusCode":409},"responseTime":0.6703750000001492,"msg":"request completed"}
+# {"level":30,"time":1792417662182,"pid":66048,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-3","req":{"method":"POST","url":"/api/searches/0c65e0c9-8eb1-4c87-adba-b5a70d327eee/capture","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662182,"pid":66048,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-3","res":{"statusCode":409},"responseTime":0.35458300000004783,"msg":"request completed"}
+# {"level":30,"time":1792417662183,"pid":66048,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-4","req":{"method":"POST","url":"/api/searches/0c65e0c9-8eb1-4c87-adba-b5a70d327eee/capture","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662183,"pid":66048,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-4","res":{"statusCode":409},"responseTime":0.285665999999992,"msg":"request completed"}
+# {"level":30,"time":1792417662183,"pid":66048,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-5","req":{"method":"POST","url":"/api/searches/0c65e0c9-8eb1-4c87-adba-b5a70d327eee/capture","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662183,"pid":66048,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-5","res":{"statusCode":409},"responseTime":0.20683299999996052,"msg":"request completed"}
+# Subtest: cancelled jobs and absent extraction cannot be captured
+ok 39 - cancelled jobs and absent extraction cannot be captured
+  ---
+  duration_ms: 28.254125
+  type: 'test'
+  ...
+# {"level":30,"time":1792417662193,"pid":66048,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-1","req":{"method":"POST","url":"/api/searches","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662206,"pid":66048,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-1","res":{"statusCode":202},"responseTime":13.561582999999928,"msg":"request completed"}
+# Subtest: revalidation rejects changed/missing PDF evidence and changed candidate evidence
+ok 40 - revalidation rejects changed/missing PDF evidence and changed candidate evidence
+  ---
+  duration_ms: 36.049084
+  type: 'test'
+  ...
+# {"level":30,"time":1792417662226,"pid":66048,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-1","req":{"method":"POST","url":"/api/searches","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662227,"pid":66048,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-1","res":{"statusCode":202},"responseTime":0.4829580000000533,"msg":"request completed"}
+# Subtest: cancellation during evidence revalidation wins over capture completion
+ok 41 - cancellation during evidence revalidation wins over capture completion
+  ---
+  duration_ms: 21.653292
+  type: 'test'
+  ...
+# {"level":30,"time":1792417662249,"pid":66048,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-1","req":{"method":"POST","url":"/api/searches","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662261,"pid":66048,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-1","res":{"statusCode":202},"responseTime":12.488584000000174,"msg":"request completed"}
+# Subtest: fresh unreadable rows cannot be resolved by selecting a remaining candidate
+ok 42 - fresh unreadable rows cannot be resolved by selecting a remaining candidate
+  ---
+  duration_ms: 30.7325
+  type: 'test'
+  ...
+# {"level":30,"time":1792417662279,"pid":66048,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-1","req":{"method":"POST","url":"/api/searches","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662280,"pid":66048,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-1","res":{"statusCode":202},"responseTime":0.4735000000000582,"msg":"request completed"}
+# Subtest: an explicit second candidate is saved instead of silently picking the first
+ok 43 - an explicit second candidate is saved instead of silently picking the first
+  ---
+  duration_ms: 20.623042
+  type: 'test'
+  ...
+# {"level":30,"time":1792417662299,"pid":66048,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-1","req":{"method":"POST","url":"/api/searches","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662300,"pid":66048,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-1","res":{"statusCode":202},"responseTime":0.4662919999998394,"msg":"request completed"}
+# Subtest: changed guide identity or failed model revalidation prevents capture
+ok 44 - changed guide identity or failed model revalidation prevents capture
+  ---
+  duration_ms: 20.205958
+  type: 'test'
+  ...
+# Subtest: the recovery verifier executes the same dependency-free catalog identity parser for every supplier
+ok 45 - the recovery verifier executes the same dependency-free catalog identity parser for every supplier
+  ---
+  duration_ms: 2.480083
+  type: 'test'
+  ...
+# Subtest: wrong product, recommendations, unreadable layout and wrong manufacturer cannot stop recovery as successful
+ok 46 - wrong product, recommendations, unreadable layout and wrong manufacturer cannot stop recovery as successful
+  ---
+  duration_ms: 2.327917
+  type: 'test'
+  ...
+# Subtest: request values are serialized as data inside the application-owned verifier
+ok 47 - request values are serialized as data inside the application-owned verifier
+  ---
+  duration_ms: 0.378667
+  type: 'test'
+  ...
+# Subtest: a product navigation with no body yet remains unmatched and can be polled again
+ok 48 - a product navigation with no body yet remains unmatched and can be polled again
+  ---
+  duration_ms: 0.591042
+  type: 'test'
+  ...
+# Subtest: zero and malformed spending limits reject before any provider request
+ok 49 - zero and malformed spending limits reject before any provider request
+  ---
+  duration_ms: 786.424417
+  type: 'test'
+  ...
+# Subtest: oversized input and output cannot reach the provider
+ok 50 - oversized input and output cannot reach the provider
+  ---
+  duration_ms: 293.60675
+  type: 'test'
+  ...
+# Subtest: concurrent requests reserve worst-case spend before billing, then reconcile usage
+ok 51 - concurrent requests reserve worst-case spend before billing, then reconcile usage
+  ---
+  duration_ms: 331.565125
+  type: 'test'
+  ...
+# Subtest: ambiguous transport failures retain the reservation and cannot trigger unlimited retries
+ok 52 - ambiguous transport failures retain the reservation and cannot trigger unlimited retries
+  ---
+  duration_ms: 232.97775
+  type: 'test'
+  ...
+# Subtest: strict schemas convert nested discriminated unions and require nullable fields
+ok 53 - strict schemas convert nested discriminated unions and require nullable fields
+  ---
+  duration_ms: 176.328041
+  type: 'test'
+  ...
+# (node:66051) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: categories use independent evidence, deterministic ties and requested quantity
+ok 54 - categories use independent evidence, deterministic ties and requested quantity
+  ---
+  duration_ms: 10.390791
+  type: 'test'
+  ...
+# Subtest: stock, pack rounding and cents prevent an apparently cheap insufficient offer from winning
+ok 55 - stock, pack rounding and cents prevent an apparently cheap insufficient offer from winning
+  ---
+  duration_ms: 0.347083
+  type: 'test'
+  ...
+# Subtest: unknown condition, price units, future pickup and company stock cannot invent category winners
+ok 56 - unknown condition, price units, future pickup and company stock cannot invent category winners
+  ---
+  duration_ms: 0.111708
+  type: 'test'
+  ...
+# Subtest: stale, future-dated, wrong identity, wrong quantity and synthetic evidence fail closed
+ok 57 - stale, future-dated, wrong identity, wrong quantity and synthetic evidence fail closed
+  ---
+  duration_ms: 0.309125
+  type: 'test'
+  ...
+# Subtest: shipping must match destination, quote quantity and future calendar date
+ok 58 - shipping must match destination, quote quantity and future calendar date
+  ---
+  duration_ms: 0.222417
+  type: 'test'
+  ...
+# Subtest: changed quantity, unreadable currency and recommendation prices remain distinct from a bound Grainger quote
+ok 59 - changed quantity, unreadable currency and recommendation prices remain distinct from a bound Grainger quote
+  ---
+  duration_ms: 1.3375
+  type: 'test'
+  ...
+# Subtest: an unfamiliar Grainger hierarchy cannot inherit a neighboring product price or ETA
+ok 60 - an unfamiliar Grainger hierarchy cannot inherit a neighboring product price or ETA
+  ---
+  duration_ms: 3.291375
+  type: 'test'
+  ...
+# Subtest: numeric inventory corruption never becomes sufficient branch or shipping stock
+ok 61 - numeric inventory corruption never becomes sufficient branch or shipping stock
+  ---
+  duration_ms: 0.161041
+  type: 'test'
+  ...
+# Subtest: large subtotals cannot overflow precise integer cents
+ok 62 - large subtotals cannot overflow precise integer cents
+  ---
+  duration_ms: 1.047208
+  type: 'test'
+  ...
+# Subtest: Step 6 never starts generic alternative searches, even when the input allows them
+ok 63 - Step 6 never starts generic alternative searches, even when the input allows them
+  ---
+  duration_ms: 186.361125
+  type: 'test'
+  ...
+# Subtest: missing origin cannot produce closest; ZIP distances are explicitly approximate
+ok 64 - missing origin cannot produce closest; ZIP distances are explicitly approximate
+  ---
+  duration_ms: 0.88125
+  type: 'test'
+  ...
+# Subtest: origin uses real bundled Census area data and never reuses it for another ZIP or city
+ok 65 - origin uses real bundled Census area data and never reuses it for another ZIP or city
+  ---
+  duration_ms: 38.30225
+  type: 'test'
+  ...
+# Subtest: Census requires one matching street and ZIP, with interpolation caveat and explicit outage
+ok 66 - Census requires one matching street and ZIP, with interpolation caveat and explicit outage
+  ---
+  duration_ms: 8.294042
+  type: 'test'
+  ...
+# Subtest: delivery parsing rejects dispatch text, impossible days and mismatched weekdays
+ok 67 - delivery parsing rejects dispatch text, impossible days and mismatched weekdays
+  ---
+  duration_ms: 0.097542
+  type: 'test'
+  ...
+# Subtest: commercial parser binds identity, primary price and shipping stock instead of recommendations
+ok 68 - commercial parser binds identity, primary price and shipping stock instead of recommendations
+  ---
+  duration_ms: 0.515708
+  type: 'test'
+  ...
+# Subtest: exact-number results expose visible rating conflicts and comparison excludes them
+ok 69 - exact-number results expose visible rating conflicts and comparison excludes them
+  ---
+  duration_ms: 0.294916
+  type: 'test'
+  ...
+# Subtest: Grainger future pickup branches retain addresses without claiming zero stock or ready-now
+ok 70 - Grainger future pickup branches retain addresses without claiming zero stock or ready-now
+  ---
+  duration_ms: 0.265958
+  type: 'test'
+  ...
+# Subtest: comparison creation is immutable, replayable, refreshable and rejects injected facts
+ok 71 - comparison creation is immutable, replayable, refreshable and rejects injected facts
+  ---
+  duration_ms: 2.891042
+  type: 'test'
+  ...
+# Subtest: expired comparison views clear winners without changing durable snapshots
+ok 72 - expired comparison views clear winners without changing durable snapshots
+  ---
+  duration_ms: 0.6615
+  type: 'test'
+  ...
+# Subtest: branch cache never persists inventory and respects cancellation before location work
+ok 73 - branch cache never persists inventory and respects cancellation before location work
+  ---
+  duration_ms: 0.343708
+  type: 'test'
+  ...
+# {"level":30,"time":1792417662206,"pid":66051,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-1","req":{"method":"POST","url":"/api/searches/aa1f5312-beab-47d4-9e87-42e1e33b5f40/compare","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662209,"pid":66051,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-2","req":{"method":"POST","url":"/api/searches/aa1f5312-beab-47d4-9e87-42e1e33b5f40/compare","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662209,"pid":66051,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-3","req":{"method":"POST","url":"/api/searches/aa1f5312-beab-47d4-9e87-42e1e33b5f40/compare","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662209,"pid":66051,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-4","req":{"method":"POST","url":"/api/searches/aa1f5312-beab-47d4-9e87-42e1e33b5f40/compare","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662209,"pid":66051,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-5","req":{"method":"POST","url":"/api/searches/aa1f5312-beab-47d4-9e87-42e1e33b5f40/compare","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662212,"pid":66051,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-6","req":{"method":"POST","url":"/api/searches/aa1f5312-beab-47d4-9e87-42e1e33b5f40/compare","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662212,"pid":66051,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-7","req":{"method":"POST","url":"/api/searches/aa1f5312-beab-47d4-9e87-42e1e33b5f40/compare","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662212,"pid":66051,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-8","req":{"method":"POST","url":"/api/searches/aa1f5312-beab-47d4-9e87-42e1e33b5f40/compare","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662212,"pid":66051,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-9","req":{"method":"POST","url":"/api/searches/aa1f5312-beab-47d4-9e87-42e1e33b5f40/compare","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662214,"pid":66051,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-a","req":{"method":"POST","url":"/api/searches/aa1f5312-beab-47d4-9e87-42e1e33b5f40/compare","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662214,"pid":66051,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-b","req":{"method":"POST","url":"/api/searches/aa1f5312-beab-47d4-9e87-42e1e33b5f40/compare","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662214,"pid":66051,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-c","req":{"method":"POST","url":"/api/searches/aa1f5312-beab-47d4-9e87-42e1e33b5f40/compare","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662214,"pid":66051,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-d","req":{"method":"POST","url":"/api/searches/aa1f5312-beab-47d4-9e87-42e1e33b5f40/compare","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662214,"pid":66051,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-e","req":{"method":"POST","url":"/api/searches/aa1f5312-beab-47d4-9e87-42e1e33b5f40/compare","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662214,"pid":66051,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-f","req":{"method":"POST","url":"/api/searches/aa1f5312-beab-47d4-9e87-42e1e33b5f40/compare","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662214,"pid":66051,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-g","req":{"method":"POST","url":"/api/searches/aa1f5312-beab-47d4-9e87-42e1e33b5f40/compare","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662214,"pid":66051,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-h","req":{"method":"POST","url":"/api/searches/aa1f5312-beab-47d4-9e87-42e1e33b5f40/compare","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662214,"pid":66051,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-i","req":{"method":"POST","url":"/api/searches/aa1f5312-beab-47d4-9e87-42e1e33b5f40/compare","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662214,"pid":66051,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-j","req":{"method":"POST","url":"/api/searches/aa1f5312-beab-47d4-9e87-42e1e33b5f40/compare","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662214,"pid":66051,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-k","req":{"method":"POST","url":"/api/searches/aa1f5312-beab-47d4-9e87-42e1e33b5f40/compare","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662225,"pid":66051,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-1","res":{"statusCode":202},"responseTime":17.894584000000123,"msg":"request completed"}
+# {"level":30,"time":1792417662232,"pid":66051,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-2","res":{"statusCode":200},"responseTime":23.122041999999965,"msg":"request completed"}
+# {"level":30,"time":1792417662233,"pid":66051,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-3","res":{"statusCode":200},"responseTime":24.07766700000002,"msg":"request completed"}
+# {"level":30,"time":1792417662233,"pid":66051,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-4","res":{"statusCode":200},"responseTime":24.396207999999888,"msg":"request completed"}
+# {"level":30,"time":1792417662233,"pid":66051,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-5","res":{"statusCode":200},"responseTime":24.360542000000123,"msg":"request completed"}
+# {"level":30,"time":1792417662234,"pid":66051,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-6","res":{"statusCode":200},"responseTime":21.706959000000097,"msg":"request completed"}
+# {"level":30,"time":1792417662235,"pid":66051,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-7","res":{"statusCode":200},"responseTime":22.745083000000022,"msg":"request completed"}
+# {"level":30,"time":1792417662236,"pid":66051,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-8","res":{"statusCode":200},"responseTime":23.540040999999974,"msg":"request completed"}
+# {"level":30,"time":1792417662238,"pid":66051,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-9","res":{"statusCode":200},"responseTime":25.30529200000001,"msg":"request completed"}
+# {"level":30,"time":1792417662241,"pid":66051,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-a","res":{"statusCode":200},"responseTime":26.416582999999946,"msg":"request completed"}
+# {"level":30,"time":1792417662241,"pid":66051,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-b","res":{"statusCode":200},"responseTime":26.81970799999999,"msg":"request completed"}
+# {"level":30,"time":1792417662241,"pid":66051,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-c","res":{"statusCode":200},"responseTime":27.012915999999905,"msg":"request completed"}
+# {"level":30,"time":1792417662241,"pid":66051,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-d","res":{"statusCode":200},"responseTime":27.15516700000012,"msg":"request completed"}
+# {"level":30,"time":1792417662242,"pid":66051,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-e","res":{"statusCode":200},"responseTime":27.435333000000128,"msg":"request completed"}
+# {"level":30,"time":1792417662242,"pid":66051,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-f","res":{"statusCode":200},"responseTime":27.56529099999989,"msg":"request completed"}
+# {"level":30,"time":1792417662242,"pid":66051,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-g","res":{"statusCode":200},"responseTime":27.959625000000187,"msg":"request completed"}
+# {"level":30,"time":1792417662243,"pid":66051,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-h","res":{"statusCode":200},"responseTime":28.306040999999823,"msg":"request completed"}
+# {"level":30,"time":1792417662243,"pid":66051,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-i","res":{"statusCode":200},"responseTime":28.92470900000012,"msg":"request completed"}
+# {"level":30,"time":1792417662244,"pid":66051,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-j","res":{"statusCode":200},"responseTime":29.238000000000056,"msg":"request completed"}
+# {"level":30,"time":1792417662245,"pid":66051,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-k","res":{"statusCode":200},"responseTime":30.15104199999996,"msg":"request completed"}
+# {"level":30,"time":1792417662245,"pid":66051,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-l","req":{"method":"POST","url":"/api/searches/aa1f5312-beab-47d4-9e87-42e1e33b5f40/compare","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# Subtest: API comparison refresh preserves the source and serializes real worker boundaries with a mock supplier
+ok 74 - API comparison refresh preserves the source and serializes real worker boundaries with a mock supplier
+  ---
+  duration_ms: 121.272959
+  type: 'test'
+  ...
+# {"level":30,"time":1792417662248,"pid":66051,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-l","res":{"statusCode":400},"responseTime":2.5779580000000806,"msg":"request completed"}
+# Subtest: an open console clears expired comparison winners without mutating saved evidence
+ok 75 - an open console clears expired comparison winners without mutating saved evidence
+  ---
+  duration_ms: 8.22625
+  type: 'test'
+  ...
+# Subtest: the console schedules expiry even after a job finishes and ignores a superseded job
+ok 76 - the console schedules expiry even after a job finishes and ignores a superseded job
+  ---
+  duration_ms: 3.167666
+  type: 'test'
+  ...
+# (node:66052) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: matching part number from another manufacturer is not an exact match
+ok 77 - matching part number from another manufacturer is not an exact match
+  ---
+  duration_ms: 1.991209
+  type: 'test'
+  ...
+# Subtest: manufacturer casing and surrounding whitespace do not change exact identity
+ok 78 - manufacturer casing and surrounding whitespace do not change exact identity
+  ---
+  duration_ms: 0.180625
+  type: 'test'
+  ...
+# Subtest: unknown stock and future pickup do not become immediate pickup
+ok 79 - unknown stock and future pickup do not become immediate pickup
+  ---
+  duration_ms: 0.130167
+  type: 'test'
+  ...
+# Subtest: package quantity changes total and unknown units exclude ranking
+ok 80 - package quantity changes total and unknown units exclude ranking
+  ---
+  duration_ms: 0.132208
+  type: 'test'
+  ...
+# Subtest: alternative candidates are never promoted to exact or eligible
+ok 81 - alternative candidates are never promoted to exact or eligible
+  ---
+  duration_ms: 0.23125
+  type: 'test'
+  ...
+# Subtest: price with insufficient or unknown availability cannot win cheapest sourcing
+ok 82 - price with insufficient or unknown availability cannot win cheapest sourcing
+  ---
+  duration_ms: 1.029833
+  type: 'test'
+  ...
+# Subtest: idempotency reuses identical requests and rejects a changed body
+ok 83 - idempotency reuses identical requests and rejects a changed body
+  ---
+  duration_ms: 4.005166
+  type: 'test'
+  ...
+# Subtest: jobs and permission decisions survive closing and reopening SQLite
+ok 84 - jobs and permission decisions survive closing and reopening SQLite
+  ---
+  duration_ms: 4.061125
+  type: 'test'
+  ...
+# {"level":30,"time":1792417662075,"pid":66052,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-1","req":{"method":"POST","url":"/api/searches","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662078,"pid":66052,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-1","res":{"statusCode":403},"responseTime":2.544750000000022,"msg":"request completed"}
+# {"level":30,"time":1792417662079,"pid":66052,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-2","req":{"method":"POST","url":"/api/searches","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662102,"pid":66052,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-2","res":{"statusCode":400},"responseTime":23.378417000000127,"msg":"request completed"}
+# {"level":30,"time":1792417662103,"pid":66052,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-3","req":{"method":"POST","url":"/api/searches","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662107,"pid":66052,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-3","res":{"statusCode":202},"responseTime":4.0066249999999854,"msg":"request completed"}
+# {"level":30,"time":1792417662108,"pid":66052,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-4","req":{"method":"POST","url":"/api/searches","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662112,"pid":66052,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-4","res":{"statusCode":200},"responseTime":3.411000000000058,"msg":"request completed"}
+# {"level":30,"time":1792417662113,"pid":66052,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-5","req":{"method":"POST","url":"/api/searches/4899056d-bd44-4020-b36e-bd50b7c12837/alternatives","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662119,"pid":66052,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-5","res":{"statusCode":409},"responseTime":5.653082999999924,"msg":"request completed"}
+# {"level":30,"time":1792417662120,"pid":66052,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-6","req":{"method":"POST","url":"/api/searches/4899056d-bd44-4020-b36e-bd50b7c12837/alternatives","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# Subtest: API rejects cross-origin writes and invalid input, enforces permission state
+ok 85 - API rejects cross-origin writes and invalid input, enforces permission state
+  ---
+  duration_ms: 262.60825
+  type: 'test'
+  ...
+# {"level":30,"time":1792417662127,"pid":66052,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-6","res":{"statusCode":200},"responseTime":6.578499999999849,"msg":"request completed"}
+# {"level":30,"time":1792417662127,"pid":66052,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-7","req":{"method":"GET","url":"/api/searches/missing","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662127,"pid":66052,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-7","res":{"statusCode":404},"responseTime":0.1617909999999938,"msg":"request completed"}
+# (node:66059) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: guide applicability is based on model column headings, not prefix inference or body mentions
+ok 86 - guide applicability is based on model column headings, not prefix inference or body mentions
+  ---
+  duration_ms: 1.420583
+  type: 'test'
+  ...
+# Subtest: general discovery with no observed candidates returns honest misses without downloading York evidence
+ok 87 - general discovery with no observed candidates returns honest misses without downloading York evidence
+  ---
+  duration_ms: 20.241084
+  type: 'test'
+  ...
+# Subtest: multiple suffixes remain ambiguous; exact full model is required and body mentions do not count
+ok 88 - multiple suffixes remain ambiguous; exact full model is required and body mentions do not count
+  ---
+  duration_ms: 29.192542
+  type: 'test'
+  ...
+# Subtest: cold-cache HTTP 404 returns unavailable without guide or inferred model
+ok 89 - cold-cache HTTP 404 returns unavailable without guide or inferred model
+  ---
+  duration_ms: 3.089917
+  type: 'test'
+  ...
+# Subtest: cold-cache network timeout returns unavailable without guide or inferred model
+ok 90 - cold-cache network timeout returns unavailable without guide or inferred model
+  ---
+  duration_ms: 1.479708
+  type: 'test'
+  ...
+# Subtest: cold-cache HTML login page returns unavailable without guide or inferred model
+ok 91 - cold-cache HTML login page returns unavailable without guide or inferred model
+  ---
+  duration_ms: 1.458375
+  type: 'test'
+  ...
+# Subtest: cold-cache oversized declared download returns unavailable without guide or inferred model
+ok 92 - cold-cache oversized declared download returns unavailable without guide or inferred model
+  ---
+  duration_ms: 1.657167
+  type: 'test'
+  ...
+# Subtest: cold-cache oversized streamed download returns unavailable without guide or inferred model
+ok 93 - cold-cache oversized streamed download returns unavailable without guide or inferred model
+  ---
+  duration_ms: 4.569084
+  type: 'test'
+  ...
+# Subtest: cold-cache missing document body returns unavailable without guide or inferred model
+ok 94 - cold-cache missing document body returns unavailable without guide or inferred model
+  ---
+  duration_ms: 2.984917
+  type: 'test'
+  ...
+# Subtest: cold-cache unrecognized document identity returns unavailable without guide or inferred model
+ok 95 - cold-cache unrecognized document identity returns unavailable without guide or inferred model
+  ---
+  duration_ms: 4.315542
+  type: 'test'
+  ...
+# Subtest: cold-cache no extractable model headings returns unavailable without guide or inferred model
+ok 96 - cold-cache no extractable model headings returns unavailable without guide or inferred model
+  ---
+  duration_ms: 2.056583
+  type: 'test'
+  ...
+# Subtest: a PDF parser failure fails closed rather than caching a valid-looking result
+ok 97 - a PDF parser failure fails closed rather than caching a valid-looking result
+  ---
+  duration_ms: 31.949333
+  type: 'test'
+  ...
+# Subtest: offline cache survives metadata-text corruption and rejects corrupt PDF bytes
+ok 98 - offline cache survives metadata-text corruption and rejects corrupt PDF bytes
+  ---
+  duration_ms: 41.488583
+  type: 'test'
+  ...
+# Subtest: malformed cache is recovered by a fresh download and a failed attempt can be retried
+ok 99 - malformed cache is recovered by a fresh download and a failed attempt can be retried
+  ---
+  duration_ms: 20.695083
+  type: 'test'
+  ...
+# Subtest: concurrent cold-cache resolutions share one download
+ok 100 - concurrent cold-cache resolutions share one download
+  ---
+  duration_ms: 29.495542
+  type: 'test'
+  ...
+# Subtest: incomplete-page warning follows PDF numbering rather than a hardcoded page count
+ok 101 - incomplete-page warning follows PDF numbering rather than a hardcoded page count
+  ---
+  duration_ms: 4.842292
+  type: 'test'
+  ...
+# {"level":30,"time":1792417662341,"pid":66059,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-1","req":{"method":"POST","url":"/api/guides/resolve","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662348,"pid":66059,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-1","res":{"statusCode":400},"responseTime":6.28975000000014,"msg":"request completed"}
+# {"level":30,"time":1792417662349,"pid":66059,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-2","req":{"method":"POST","url":"/api/guides/resolve","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662350,"pid":66059,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-2","res":{"statusCode":400},"responseTime":1.7287920000001122,"msg":"request completed"}
+# {"level":30,"time":1792417662351,"pid":66059,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-3","req":{"method":"POST","url":"/api/guides/resolve","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662352,"pid":66059,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-3","res":{"statusCode":400},"responseTime":1.442542000000003,"msg":"request completed"}
+# {"level":30,"time":1792417662353,"pid":66059,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-4","req":{"method":"GET","url":"/api/guides/not-a-hash/document","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662353,"pid":66059,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-4","res":{"statusCode":400},"responseTime":0.3132499999999254,"msg":"request completed"}
+# {"level":30,"time":1792417662353,"pid":66059,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-5","req":{"method":"GET","url":"/api/guides/0000000000000000000000000000000000000000000000000000000000000000/document","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662356,"pid":66059,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-5","res":{"statusCode":404},"responseTime":2.4269580000000133,"msg":"request completed"}
+# {"level":30,"time":1792417662358,"pid":66059,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-6","req":{"method":"POST","url":"/api/searches","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662363,"pid":66059,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-6","res":{"statusCode":202},"responseTime":4.813250000000153,"msg":"request completed"}
+# {"level":30,"time":1792417662376,"pid":66059,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-7","req":{"method":"GET","url":"/api/guides/f6adab3a0e57c5a7fe9dd499e5ccb7588cf17edc17e0669ddf1310ec535dac67/document","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662377,"pid":66059,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-7","res":{"statusCode":200},"responseTime":0.9476670000001377,"msg":"request completed"}
+# {"level":30,"time":1792417662377,"pid":66059,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-8","req":{"method":"POST","url":"/api/searches/d8a0f46c-301e-48c9-85cc-4131a95eb31d/alternatives","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662377,"pid":66059,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-8","res":{"statusCode":409},"responseTime":0.31658299999980954,"msg":"request completed"}
+# {"level":30,"time":1792417662378,"pid":66059,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-9","req":{"method":"POST","url":"/api/searches/d8a0f46c-301e-48c9-85cc-4131a95eb31d/clarification","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662379,"pid":66059,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-9","res":{"statusCode":202},"responseTime":1.4210410000000593,"msg":"request completed"}
+# {"level":30,"time":1792417662392,"pid":66059,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-a","req":{"method":"POST","url":"/api/searches/d8a0f46c-301e-48c9-85cc-4131a95eb31d/clarification","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662393,"pid":66059,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-a","res":{"statusCode":202},"responseTime":1.5045000000000073,"msg":"request completed"}
+# {"level":30,"time":1792417662405,"pid":66059,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-b","req":{"method":"POST","url":"/api/searches/d8a0f46c-301e-48c9-85cc-4131a95eb31d/clarification","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662406,"pid":66059,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-b","res":{"statusCode":409},"responseTime":0.5689589999999498,"msg":"request completed"}
+# Subtest: guide API validates input and drives prefix → wrong suffix → correct suffix without supplier calls
+ok 102 - guide API validates input and drives prefix → wrong suffix → correct suffix without supplier calls
+  ---
+  duration_ms: 188.254875
+  type: 'test'
+  ...
+# Subtest: worker requests missing or conflicting manufacturers rather than assuming York
+ok 103 - worker requests missing or conflicting manufacturers rather than assuming York
+  ---
+  duration_ms: 37.090041
+  type: 'test'
+  ...
+# Subtest: cancellation during a guide download cannot be overwritten by a later successful result
+ok 104 - cancellation during a guide download cannot be overwritten by a later successful result
+  ---
+  duration_ms: 4.210416
+  type: 'test'
+  ...
+# (node:66061) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: part number comes from the exact model column, with complete provenance and unknown voltage
+ok 105 - part number comes from the exact model column, with complete provenance and unknown voltage
+  ---
+  duration_ms: 1.803833
+  type: 'test'
+  ...
+# Subtest: control board is a reviewed semantic candidate; explicit defrost request resolves it
+ok 106 - control board is a reviewed semantic candidate; explicit defrost request resolves it
+  ---
+  duration_ms: 0.310042
+  type: 'test'
+  ...
+# Subtest: two applicable capacitor types require clarification; not-applicable cells are never candidates
+ok 107 - two applicable capacitor types require clarification; not-applicable cells are never candidates
+  ---
+  duration_ms: 0.139416
+  type: 'test'
+  ...
+# Subtest: prefix, absent suffix and mismatched applicability block all extraction
+ok 108 - prefix, absent suffix and mismatched applicability block all extraction
+  ---
+  duration_ms: 0.118959
+  type: 'test'
+  ...
+# Subtest: missing cell cannot silently shift columns or prove a unique match
+ok 109 - missing cell cannot silently shift columns or prove a unique match
+  ---
+  duration_ms: 0.067542
+  type: 'test'
+  ...
+# Subtest: extra cell cannot silently shift columns or prove a unique match
+ok 110 - extra cell cannot silently shift columns or prove a unique match
+  ---
+  duration_ms: 0.039125
+  type: 'test'
+  ...
+# Subtest: unrecognized cell cannot silently shift columns or prove a unique match
+ok 111 - unrecognized cell cannot silently shift columns or prove a unique match
+  ---
+  duration_ms: 0.081208
+  type: 'test'
+  ...
+# Subtest: no cells cannot silently shift columns or prove a unique match
+ok 112 - no cells cannot silently shift columns or prove a unique match
+  ---
+  duration_ms: 0.036959
+  type: 'test'
+  ...
+# Subtest: a duplicated model heading is unreadable; a page for another model contributes no parts
+ok 113 - a duplicated model heading is unreadable; a page for another model contributes no parts
+  ---
+  duration_ms: 0.18125
+  type: 'test'
+  ...
+# Subtest: unknown terminology is not mapped to a guessed part; extraction cannot cross page headers
+ok 114 - unknown terminology is not mapped to a guessed part; extraction cannot cross page headers
+  ---
+  duration_ms: 0.301333
+  type: 'test'
+  ...
+# Subtest: changed or unavailable PDF evidence returns no candidates
+ok 115 - changed or unavailable PDF evidence returns no candidates
+  ---
+  duration_ms: 0.815708
+  type: 'test'
+  ...
+# {"level":30,"time":1792417662449,"pid":66061,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-1","req":{"method":"POST","url":"/api/guides/extract","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662473,"pid":66061,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-1","res":{"statusCode":400},"responseTime":23.289416000000074,"msg":"request completed"}
+# {"level":30,"time":1792417662473,"pid":66061,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-2","req":{"method":"POST","url":"/api/guides/extract","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662489,"pid":66061,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-2","res":{"statusCode":200},"responseTime":15.883833999999979,"msg":"request completed"}
+# {"level":30,"time":1792417662490,"pid":66061,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-3","req":{"method":"POST","url":"/api/searches","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662498,"pid":66061,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-3","res":{"statusCode":202},"responseTime":8.027540999999928,"msg":"request completed"}
+# {"level":30,"time":1792417662511,"pid":66061,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-4","req":{"method":"POST","url":"/api/searches/d5d5dbad-8683-42be-9765-c577a5a427a7/clarification","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662513,"pid":66061,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-4","res":{"statusCode":202},"responseTime":1.7474159999999301,"msg":"request completed"}
+# Subtest: step 3 API/worker persists candidates, blocks prefix and clarifies descriptions without sourcing
+ok 116 - step 3 API/worker persists candidates, blocks prefix and clarifies descriptions without sourcing
+  ---
+  duration_ms: 259.817834
+  type: 'test'
+  ...
+# Subtest: recovery accepts a typed result only after the child exits
+ok 117 - recovery accepts a typed result only after the child exits
+  ---
+  duration_ms: 225.731167
+  type: 'test'
+  ...
+# Subtest: agent success cannot override failed navigation
+ok 118 - agent success cannot override failed navigation
+  ---
+  duration_ms: 87.446375
+  type: 'test'
+  ...
+# Subtest: Browser Use external-stop callback can return null agent success after verified navigation
+ok 119 - Browser Use external-stop callback can return null agent success after verified navigation
+  ---
+  duration_ms: 75.047833
+  type: 'test'
+  ...
+# Subtest: executed candidate indices and tool inventory are typed and bounded
+ok 120 - executed candidate indices and tool inventory are typed and bounded
+  ---
+  duration_ms: 652.377667
+  type: 'test'
+  ...
+# Subtest: recovery phase events survive chunked output without becoming result authority
+ok 121 - recovery phase events survive chunked output without becoming result authority
+  ---
+  duration_ms: 74.110291
+  type: 'test'
+  ...
+# Subtest: malformed, duplicate, missing and string-boolean recovery results fail closed
+ok 122 - malformed, duplicate, missing and string-boolean recovery results fail closed
+  ---
+  duration_ms: 296.53275
+  type: 'test'
+  ...
+# Subtest: nonzero exit cannot claim success and missing executable fails promptly
+ok 123 - nonzero exit cannot claim success and missing executable fails promptly
+  ---
+  duration_ms: 51.309459
+  type: 'test'
+  ...
+# Subtest: timeout kills and reaps recovery before browser ownership can return
+ok 124 - timeout kills and reaps recovery before browser ownership can return
+  ---
+  duration_ms: 84.005417
+  type: 'test'
+  ...
+# Subtest: oversized model output is bounded and terminates the child
+ok 125 - oversized model output is bounded and terminates the child
+  ---
+  duration_ms: 59.337666
+  type: 'test'
+  ...
+# Subtest: production recovery configuration initializes the installed Browser Use SDK without network or Chrome
+ok 126 - production recovery configuration initializes the installed Browser Use SDK without network or Chrome
+  ---
+  duration_ms: 2360.495125
+  type: 'test'
+  ...
+# Subtest: bounded post-model inspection verifies remaining observed candidates without repeats or exceeding the visit budget
+ok 127 - bounded post-model inspection verifies remaining observed candidates without repeats or exceeding the visit budget
+  ---
+  duration_ms: 593.501291
+  type: 'test'
+  ...
+# Subtest: startup failures disconnect the recovery browser before the error returns
+ok 128 - startup failures disconnect the recovery browser before the error returns
+  ---
+  duration_ms: 688.662416
+  type: 'test'
+  ...
+# (node:66085) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: empty fragments cannot disguise same-page controls as product candidates
+ok 129 - empty fragments cannot disguise same-page controls as product candidates
+  ---
+  duration_ms: 0.717417
+  type: 'test'
+  ...
+# Subtest: live model recovery permits only bounded supplier product links
+ok 130 - live model recovery permits only bounded supplier product links
+  ---
+  duration_ms: 0.684708
+  type: 'test'
+  ...
+# Subtest: login contract requires credentials and validates ZIP/store without accepting arbitrary destinations
+ok 131 - login contract requires credentials and validates ZIP/store without accepting arbitrary destinations
+  ---
+  duration_ms: 1.228333
+  type: 'test'
+  ...
+# {"level":30,"time":1792417662710,"pid":66085,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-1","req":{"method":"POST","url":"/api/connections/grainger/login","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662718,"pid":66085,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-1","res":{"statusCode":400},"responseTime":6.595125000000053,"msg":"request completed"}
+# {"level":30,"time":1792417662718,"pid":66085,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-2","req":{"method":"POST","url":"/api/connections/unknown/login","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662720,"pid":66085,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-2","res":{"statusCode":400},"responseTime":2.3174589999999853,"msg":"request completed"}
+# {"level":30,"time":1792417662721,"pid":66085,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-3","req":{"method":"POST","url":"/api/connections/partstown/login","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662722,"pid":66085,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-3","res":{"statusCode":400},"responseTime":1.0494590000000699,"msg":"request completed"}
+# {"level":30,"time":1792417662723,"pid":66085,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-4","req":{"method":"POST","url":"/api/connections/johnstone/login","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# Subtest: connection API rejects unsupported providers, invalid inputs and busy sessions without echoing secrets
+ok 132 - connection API rejects unsupported providers, invalid inputs and busy sessions without echoing secrets
+  ---
+  duration_ms: 74.878208
+  type: 'test'
+  ...
+# Subtest: exact navigation cannot choose a manufacturer category or leave an existing product for another link
+ok 133 - exact navigation cannot choose a manufacturer category or leave an existing product for another link
+  ---
+  duration_ms: 0.394667
+  type: 'test'
+  ...
+# Subtest: only reviewed legacy York product paths are allowed, never generic two-segment categories
+ok 134 - only reviewed legacy York product paths are allowed, never generic two-segment categories
+  ---
+  duration_ms: 0.070583
+  type: 'test'
+  ...
+# Subtest: table-row product context can locate an exact identifier without inheriting another row
+ok 135 - table-row product context can locate an exact identifier without inheriting another row
+  ---
+  duration_ms: 0.117083
+  type: 'test'
+  ...
+# Subtest: informational product-collections pages are not product recovery destinations
+ok 136 - informational product-collections pages are not product recovery destinations
+  ---
+  duration_ms: 0.220458
+  type: 'test'
+  ...
+# Subtest: product selection cannot confuse a longer identifier with an exact one
+ok 137 - product selection cannot confuse a longer identifier with an exact one
+  ---
+  duration_ms: 0.331042
+  type: 'test'
+  ...
+# Subtest: product destinations reject action subpaths, fragments and unexpected ports
+ok 138 - product destinations reject action subpaths, fragments and unexpected ports
+  ---
+  duration_ms: 0.285958
+  type: 'test'
+  ...
+# Subtest: recovery keeps only its original tab before the single-domain Browser Use handoff
+ok 139 - recovery keeps only its original tab before the single-domain Browser Use handoff
+  ---
+  duration_ms: 0.884083
+  type: 'test'
+  ...
+# {"level":30,"time":1792417662724,"pid":66085,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-4","res":{"statusCode":409},"responseTime":0.7588330000000951,"msg":"request completed"}
+# (node:66090) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: captured source creates an immutable, idempotent child with only server-selected exact identifiers
+ok 140 - captured source creates an immutable, idempotent child with only server-selected exact identifiers
+  ---
+  duration_ms: 4.350958
+  type: 'test'
+  ...
+# Subtest: missing or unfinished capture cannot start supplier work
+ok 141 - missing or unfinished capture cannot start supplier work
+  ---
+  duration_ms: 0.332667
+  type: 'test'
+  ...
+# Subtest: supplier failures override no-match permission; exact job preserves capture and continues other suppliers
+ok 142 - supplier failures override no-match permission; exact job preserves capture and continues other suppliers
+  ---
+  duration_ms: 10.954125
+  type: 'test'
+  ...
+# {"level":30,"time":1792417662824,"pid":66090,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-1","req":{"method":"POST","url":"/api/searches/ddefccfc-76de-45ce-82e0-2eb05b8241d6/alternatives","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662827,"pid":66090,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-1","res":{"statusCode":409},"responseTime":2.4843329999999924,"msg":"request completed"}
+# {"level":30,"time":1792417662827,"pid":66090,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-2","req":{"method":"POST","url":"/api/searches/ddefccfc-76de-45ce-82e0-2eb05b8241d6/alternatives","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# Subtest: completed no-match checks pause for permission and captured alternatives remain specification-blocked
+ok 143 - completed no-match checks pause for permission and captured alternatives remain specification-blocked
+  ---
+  duration_ms: 66.890459
+  type: 'test'
+  ...
+# {"level":30,"time":1792417662828,"pid":66090,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-2","res":{"statusCode":200},"responseTime":0.5873750000000655,"msg":"request completed"}
+# {"level":30,"time":1792417662844,"pid":66090,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-1","req":{"method":"POST","url":"/api/searches/47e5b25f-1325-4ea2-ad45-836099d681fa/retry","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662844,"pid":66090,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-1","res":{"statusCode":202},"responseTime":0.5554999999999382,"msg":"request completed"}
+# Subtest: exact offers are retained without inventing local inventory and retry refreshes rather than duplicates
+ok 144 - exact offers are retained without inventing local inventory and retry refreshes rather than duplicates
+  ---
+  duration_ms: 29.32625
+  type: 'test'
+  ...
+# {"level":30,"time":1792417662861,"pid":66090,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-1","req":{"method":"POST","url":"/api/searches/5ab1d75e-df1f-4b67-bf9d-826013ed68a5/source","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662861,"pid":66090,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-1","res":{"statusCode":202},"responseTime":0.4878750000000309,"msg":"request completed"}
+# {"level":30,"time":1792417662862,"pid":66090,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-2","req":{"method":"POST","url":"/api/searches/5ab1d75e-df1f-4b67-bf9d-826013ed68a5/source","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# {"level":30,"time":1792417662863,"pid":66090,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-2","res":{"statusCode":200},"responseTime":0.9506250000000591,"msg":"request completed"}
+# {"level":30,"time":1792417662863,"pid":66090,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-3","req":{"method":"POST","url":"/api/searches/5ab1d75e-df1f-4b67-bf9d-826013ed68a5/source","host":"localhost:80","remoteAddress":"127.0.0.1"},"msg":"incoming request"}
+# Subtest: API source starts once, replays safely, validates scope and leaves capture intact
+ok 145 - API source starts once, replays safely, validates scope and leaves capture intact
+  ---
+  duration_ms: 5.540375
+  type: 'test'
+  ...
+# Subtest: public catalog parser binds identity and displayed price to the main product, never branch stock
+ok 146 - public catalog parser binds identity and displayed price to the main product, never branch stock
+  ---
+  duration_ms: 0.859625
+  type: 'test'
+  ...
+# Subtest: recommendations, previous part numbers and list prices cannot substitute for requested product data
+ok 147 - recommendations, previous part numbers and list prices cannot substitute for requested product data
+  ---
+  duration_ms: 0.208208
+  type: 'test'
+  ...
+# Subtest: cancellation during sourcing preserves the capture and prevents subsequent supplier work
+ok 148 - cancellation during sourcing preserves the capture and prevents subsequent supplier work
+  ---
+  duration_ms: 0.916375
+  type: 'test'
+  ...
+# Subtest: legacy punctuation and third-party seller titles remain exact identities without becoming branch inventory
+ok 149 - legacy punctuation and third-party seller titles remain exact identities without becoming branch inventory
+  ---
+  duration_ms: 0.335791
+  type: 'test'
+  ...
+# {"level":30,"time":1792417662863,"pid":66090,"hostname":"Shashanks-MacBook-Pro.local","reqId":"req-3","res":{"statusCode":400},"responseTime":0.38008300000001327,"msg":"request completed"}
+# (node:66093) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: twelve queued jobs and duplicate enqueues serialize browser ownership without dropped attempts
+ok 150 - twelve queued jobs and duplicate enqueues serialize browser ownership without dropped attempts
+  ---
+  duration_ms: 191.687334
+  type: 'test'
+  ...
+# Subtest: each real-world failure class remains a partial error and does not block the next supplier or job
+ok 151 - each real-world failure class remains a partial error and does not block the next supplier or job
+  ---
+  duration_ms: 5.292459
+  type: 'test'
+  ...
+# Subtest: restart refreshes interrupted read-only jobs without duplicating stale offers or attempts
+ok 152 - restart refreshes interrupted read-only jobs without duplicating stale offers or attempts
+  ---
+  duration_ms: 0.838917
+  type: 'test'
+  ...
+# Subtest: queued cancellation makes zero supplier calls and cannot be resurrected by restart
+ok 153 - queued cancellation makes zero supplier calls and cannot be resurrected by restart
+  ---
+  duration_ms: 0.244333
+  type: 'test'
+  ...
+# Subtest: Johnstone reads primary identity and one account price without using recommended product price or stock
+ok 154 - Johnstone reads primary identity and one account price without using recommended product price or stock
+  ---
+  duration_ms: 3.028541
+  type: 'test'
+  ...
+# Subtest: OEM service-brand relationship never accepts different numbers, unrelated brands, suppliers or non-S1 identifiers
+ok 155 - OEM service-brand relationship never accepts different numbers, unrelated brands, suppliers or non-S1 identifiers
+  ---
+  duration_ms: 0.686459
+  type: 'test'
+  ...
+# Subtest: Johnstone ambiguous pricing remains unknown and a recommendation cannot supply missing primary identity
+ok 156 - Johnstone ambiguous pricing remains unknown and a recommendation cannot supply missing primary identity
+  ---
+  duration_ms: 0.117
+  type: 'test'
+  ...
+# Subtest: Grainger exact-query no-results page with unrelated suggestions is a conclusive query no-match, without model recovery
+ok 157 - Grainger exact-query no-results page with unrelated suggestions is a conclusive query no-match, without model recovery
+  ---
+  duration_ms: 0.28375
+  type: 'test'
+  ...
+# Subtest: stale title, mismatched query, missing heading, category URLs and error pages do not prove Grainger no-match
+ok 158 - stale title, mismatched query, missing heading, category URLs and error pages do not prove Grainger no-match
+  ---
+  duration_ms: 0.1695
+  type: 'test'
+  ...
+# Subtest: Grainger parses primary heading and model independently and ignores recommendation price
+ok 159 - Grainger parses primary heading and model independently and ignores recommendation price
+  ---
+  duration_ms: 0.449125
+  type: 'test'
+  ...
+# Subtest: Grainger table-result product can prove identity through its main model and brand even when heading omits the number
+ok 160 - Grainger table-result product can prove identity through its main model and brand even when heading omits the number
+  ---
+  duration_ms: 0.322
+  type: 'test'
+  ...
+# Subtest: generic no-match text needs the exact supplier query and an absence heading
+ok 161 - generic no-match text needs the exact supplier query and an absence heading
+  ---
+  duration_ms: 0.38425
+  type: 'test'
+  ...
+# Subtest: Johnstone live no-results paragraph must quote this query before popular products
+ok 162 - Johnstone live no-results paragraph must quote this query before popular products
+  ---
+  duration_ms: 0.658625
+  type: 'test'
+  ...
+# Subtest: complete small query result sets can prove no exact number only after every returned product identity is inspected
+ok 163 - complete small query result sets can prove no exact number only after every returned product identity is inspected
+  ---
+  duration_ms: 1.160709
+  type: 'test'
+  ...
+# Subtest: query-result inspection cannot hide an unreadable item, pagination, stale query or matching number under another brand
+ok 164 - query-result inspection cannot hide an unreadable item, pagination, stale query or matching number under another brand
+  ---
+  duration_ms: 0.391833
+  type: 'test'
+  ...
+# Subtest: inspected capacitor details keep Brand separate from adjacent specification labels
+ok 165 - inspected capacitor details keep Brand separate from adjacent specification labels
+  ---
+  duration_ms: 0.150667
+  type: 'test'
+  ...
+# Subtest: origin permits full state labels only when grounded in the supplied address
+ok 166 - origin permits full state labels only when grounded in the supplied address
+  ---
+  duration_ms: 1.880417
+  type: 'test'
+  ...
+1..166
+# tests 166
+# suites 0
+# pass 166
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 4952.616583

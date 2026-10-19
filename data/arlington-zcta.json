@@ -1,0 +1,15 @@
+{
+  "sourceUrl": "https://www2.census.gov/geo/docs/maps-data/data/gazetteer/2026_Gazetteer/2026_Gaz_zcta_national.zip",
+  "retrievedAt": "2026-10-18T12:52:16.172221+00:00",
+  "archiveSha256": "f1e9046b91f6e60686a99343cb2752834c02b0764939403b331c78c017e2c54c",
+  "record": {
+    "GEOID": "22201",
+    "GEOIDFQ": "860Z200US22201",
+    "ALAND": "5943666",
+    "AWATER": "0",
+    "ALAND_SQMI": "2.295",
+    "AWATER_SQMI": "0.",
+    "INTPTLAT": "38.886804",
+    "INTPTLONG": "-77.094992"
+  }
+}

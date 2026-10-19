@@ -1,0 +1,311 @@
+{
+  "jobId": "b797d7db-6907-475e-8440-3709c85c315a",
+  "supplier": "johnstone",
+  "elapsedMs": 88586,
+  "result": {
+    "offers": [
+      {
+        "manufacturer": "Source 1",
+        "partNumber": "S1-33101975102",
+        "description": "CONTROL, DEFROST",
+        "supplierSku": "L41-755",
+        "price": 196.72,
+        "currency": null,
+        "unit": null,
+        "packSize": null,
+        "condition": null,
+        "branch": null,
+        "stockQuantity": null,
+        "pickupReady": null,
+        "stockText": "See agent-observed branch and shipping evidence.",
+        "shippingText": null,
+        "identityEvidence": {
+          "basis": "oem_service_brand",
+          "requestedManufacturer": "York",
+          "sourceUrl": "https://www.johnsoncontrols.com/Services-and-Support/Replacement-Parts-and-Supplies/Residential-and-Light-Commercial-Parts"
+        },
+        "supplier": "johnstone",
+        "match": "exact",
+        "observedAt": "2026-10-19T00:07:14.937Z",
+        "sourceUrl": "https://www.johnstonesupply.com/product-view?pID=L41-755#",
+        "evidence": "johnstone-agent-4-92a9aa26-a636-4f0c-aad9-e59fc82557eb.png",
+        "synthetic": false,
+        "eligible": false,
+        "total": null,
+        "reason": "Price, purchase unit, pack size, currency or condition is unverified",
+        "commercial": {
+          "status": "observed",
+          "manufacturer": "Source 1",
+          "partNumber": "S1-33101975102",
+          "requestedQuantity": 1,
+          "price": {
+            "amount": 196.72,
+            "currency": null,
+            "unit": null,
+            "packSize": null,
+            "condition": null,
+            "basis": "account_unverified",
+            "text": "$196.72"
+          },
+          "shipping": {
+            "quantity": null,
+            "quantityBasis": "unknown",
+            "arrivalDate": null,
+            "destinationZip": null,
+            "quantityConfirmed": false,
+            "text": ""
+          },
+          "branches": [
+            {
+              "id": "406",
+              "name": "Arbutus",
+              "address": "",
+              "stockQuantity": 1,
+              "quantityBasis": "unknown",
+              "pickupReady": null,
+              "evidence": {
+                "screenshot": "johnstone-agent-4-92a9aa26-a636-4f0c-aad9-e59fc82557eb.png",
+                "url": "https://www.johnstonesupply.com/product-view?pID=L41-755#",
+                "observedAt": "2026-10-19T00:07:14.937Z"
+              }
+            },
+            {
+              "id": "369",
+              "name": "Rosedale",
+              "address": "",
+              "stockQuantity": 1,
+              "quantityBasis": "unknown",
+              "pickupReady": null,
+              "evidence": {
+                "screenshot": "johnstone-agent-4-92a9aa26-a636-4f0c-aad9-e59fc82557eb.png",
+                "url": "https://www.johnstonesupply.com/product-view?pID=L41-755#",
+                "observedAt": "2026-10-19T00:07:14.937Z"
+              }
+            },
+            {
+              "id": "123",
+              "name": "Easton",
+              "address": "",
+              "stockQuantity": 1,
+              "quantityBasis": "unknown",
+              "pickupReady": null,
+              "evidence": {
+                "screenshot": "johnstone-agent-4-92a9aa26-a636-4f0c-aad9-e59fc82557eb.png",
+                "url": "https://www.johnstonesupply.com/product-view?pID=L41-755#",
+                "observedAt": "2026-10-19T00:07:14.937Z"
+              }
+            },
+            {
+              "id": "704",
+              "name": "Pittston",
+              "address": "",
+              "stockQuantity": 1,
+              "quantityBasis": "unknown",
+              "pickupReady": null,
+              "evidence": {
+                "screenshot": "johnstone-agent-4-92a9aa26-a636-4f0c-aad9-e59fc82557eb.png",
+                "url": "https://www.johnstonesupply.com/product-view?pID=L41-755#",
+                "observedAt": "2026-10-19T00:07:14.937Z"
+              }
+            }
+          ],
+          "evidence": {
+            "screenshot": "johnstone-agent-4-92a9aa26-a636-4f0c-aad9-e59fc82557eb.png",
+            "url": "https://www.johnstonesupply.com/product-view?pID=L41-755#",
+            "observedAt": "2026-10-19T00:07:14.937Z"
+          },
+          "issues": [
+            "Goal-driven browser agent: action_not_permitted. Missing fields remain unknown.",
+            "Currency was not explicitly grounded in the inspected page.",
+            "Condition was not explicitly grounded in the inspected page."
+          ]
+        },
+        "agent": {
+          "engine": "stagehand_goal_agent",
+          "model": "gpt-6-luna",
+          "steps": 5,
+          "termination": "action_not_permitted",
+          "observations": [
+            {
+              "quote": "Brand: Source 1",
+              "branchId": null,
+              "branchName": null,
+              "field": "manufacturer",
+              "value": "Source 1",
+              "evidence": {
+                "screenshot": "johnstone-agent-4-92a9aa26-a636-4f0c-aad9-e59fc82557eb.png",
+                "url": "https://www.johnstonesupply.com/product-view?pID=L41-755#",
+                "observedAt": "2026-10-19T00:07:14.937Z"
+              }
+            },
+            {
+              "quote": "Mfg. #: S1-33101975102",
+              "branchId": null,
+              "branchName": null,
+              "field": "partNumber",
+              "value": "S1-33101975102",
+              "evidence": {
+                "screenshot": "johnstone-agent-4-92a9aa26-a636-4f0c-aad9-e59fc82557eb.png",
+                "url": "https://www.johnstonesupply.com/product-view?pID=L41-755#",
+                "observedAt": "2026-10-19T00:07:14.937Z"
+              }
+            },
+            {
+              "quote": "Description: CONTROL, DEFROST;",
+              "branchId": null,
+              "branchName": null,
+              "field": "description",
+              "value": "CONTROL, DEFROST",
+              "evidence": {
+                "screenshot": "johnstone-agent-4-92a9aa26-a636-4f0c-aad9-e59fc82557eb.png",
+                "url": "https://www.johnstonesupply.com/product-view?pID=L41-755#",
+                "observedAt": "2026-10-19T00:07:14.937Z"
+              }
+            },
+            {
+              "quote": "Order #: L41-755",
+              "branchId": null,
+              "branchName": null,
+              "field": "supplierSku",
+              "value": "L41-755",
+              "evidence": {
+                "screenshot": "johnstone-agent-4-92a9aa26-a636-4f0c-aad9-e59fc82557eb.png",
+                "url": "https://www.johnstonesupply.com/product-view?pID=L41-755#",
+                "observedAt": "2026-10-19T00:07:14.937Z"
+              }
+            },
+            {
+              "quote": "$196.72",
+              "branchId": null,
+              "branchName": null,
+              "field": "price",
+              "value": "196.72",
+              "evidence": {
+                "screenshot": "johnstone-agent-4-92a9aa26-a636-4f0c-aad9-e59fc82557eb.png",
+                "url": "https://www.johnstonesupply.com/product-view?pID=L41-755#",
+                "observedAt": "2026-10-19T00:07:14.937Z"
+              }
+            },
+            {
+              "quote": "Arbutus - #406\t1",
+              "branchId": "406",
+              "branchName": "Arbutus",
+              "field": "branchStock",
+              "value": "1",
+              "evidence": {
+                "screenshot": "johnstone-agent-4-92a9aa26-a636-4f0c-aad9-e59fc82557eb.png",
+                "url": "https://www.johnstonesupply.com/product-view?pID=L41-755#",
+                "observedAt": "2026-10-19T00:07:14.937Z"
+              }
+            },
+            {
+              "quote": "Rosedale - #369\t1",
+              "branchId": "369",
+              "branchName": "Rosedale",
+              "field": "branchStock",
+              "value": "1",
+              "evidence": {
+                "screenshot": "johnstone-agent-4-92a9aa26-a636-4f0c-aad9-e59fc82557eb.png",
+                "url": "https://www.johnstonesupply.com/product-view?pID=L41-755#",
+                "observedAt": "2026-10-19T00:07:14.937Z"
+              }
+            },
+            {
+              "quote": "Easton - #123\t1",
+              "branchId": "123",
+              "branchName": "Easton",
+              "field": "branchStock",
+              "value": "1",
+              "evidence": {
+                "screenshot": "johnstone-agent-4-92a9aa26-a636-4f0c-aad9-e59fc82557eb.png",
+                "url": "https://www.johnstonesupply.com/product-view?pID=L41-755#",
+                "observedAt": "2026-10-19T00:07:14.937Z"
+              }
+            },
+            {
+              "quote": "Pittston - #704\t1",
+              "branchId": "704",
+              "branchName": "Pittston",
+              "field": "branchStock",
+              "value": "1",
+              "evidence": {
+                "screenshot": "johnstone-agent-4-92a9aa26-a636-4f0c-aad9-e59fc82557eb.png",
+                "url": "https://www.johnstonesupply.com/product-view?pID=L41-755#",
+                "observedAt": "2026-10-19T00:07:14.937Z"
+              }
+            },
+            {
+              "quote": "Allentown Distribution Center\t46",
+              "branchId": null,
+              "branchName": "Allentown Distribution Center",
+              "field": "branchStock",
+              "value": "46",
+              "evidence": {
+                "screenshot": "johnstone-agent-4-92a9aa26-a636-4f0c-aad9-e59fc82557eb.png",
+                "url": "https://www.johnstonesupply.com/product-view?pID=L41-755#",
+                "observedAt": "2026-10-19T00:07:14.937Z"
+              }
+            }
+          ],
+          "actions": [
+            {
+              "instruction": "Fill the Search for products box with S1-33101975102",
+              "description": "Search for products input",
+              "method": "fill",
+              "url": "https://www.johnstonesupply.com/store461",
+              "outcome": "executed",
+              "selector": "xpath=/html[1]/body[1]/div[6]/div[1]/div[1]/div[3]/form[1]/div[1]/input[1]",
+              "targetHref": ""
+            },
+            {
+              "instruction": "Click the Defrost Control product suggestion with manufacturer number S1-33101975102",
+              "description": "Exact Defrost Control product suggestion with manufacturer number S1-33101975102.",
+              "method": "click",
+              "url": "https://www.johnstonesupply.com/store461",
+              "outcome": "executed",
+              "selector": "xpath=/html[1]/body[1]/div[6]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/h6[1]/a[1]",
+              "targetHref": "https://www.johnstonesupply.com/product-view?pID=L41-755"
+            },
+            {
+              "instruction": "Click the Sterling - #562 availability link to inspect that branch\u2019s address and stock details",
+              "description": "Sterling - #562 availability link; open this branch\u2019s address and stock details.",
+              "method": "click",
+              "url": "https://www.johnstonesupply.com/product-view?pID=L41-755",
+              "outcome": "executed",
+              "selector": "xpath=/html[1]/body[1]/div[11]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[4]/div[3]/div[1]/table[1]/tbody[1]/tr[2]/th[1]/a[1]",
+              "targetHref": "https://www.johnstonesupply.com/product-view?pID=L41-755#"
+            },
+            {
+              "instruction": "Click the Sterling - #562 availability link again to open its branch details; the current page already shows Alexandria branch details and stock for branches #406, #369, #123, and #704.",
+              "description": "Availability link for Sterling branch #562; open its branch details.",
+              "method": "click",
+              "url": "https://www.johnstonesupply.com/product-view?pID=L41-755#",
+              "outcome": "executed",
+              "selector": "xpath=/html[1]/body[1]/div[11]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[4]/div[3]/div[1]/table[1]/tbody[1]/tr[2]/th[1]/a[1]",
+              "targetHref": "https://www.johnstonesupply.com/product-view?pID=L41-755#"
+            },
+            {
+              "instruction": "Click the Shopping location selector and choose Sterling - #562 to inspect that branch\u2019s address and stock.",
+              "description": "Shopping location selector; choose Sterling - #562 to inspect that branch\u2019s address and stock.",
+              "method": "selectOptionFromDropdown",
+              "url": "https://www.johnstonesupply.com/product-view?pID=L41-755#",
+              "outcome": "blocked_unverified_or_unsafe_control"
+            },
+            {
+              "instruction": "Click the Shopping location selector and choose Sterling - #562 to inspect that branch\u2019s address and stock.",
+              "description": "Browser Use semantic workflow recovery",
+              "method": "recover",
+              "url": "https://www.johnstonesupply.com/product-view?pID=L41-755#",
+              "outcome": "unresolved"
+            }
+          ]
+        }
+      }
+    ],
+    "evidence": {
+      "screenshot": "johnstone-agent-4-92a9aa26-a636-4f0c-aad9-e59fc82557eb.png",
+      "url": "https://www.johnstonesupply.com/product-view?pID=L41-755#",
+      "observedAt": "2026-10-19T00:07:14.937Z"
+    }
+  }
+}
