@@ -31,7 +31,7 @@ The agreed workflow:
 6. Compare lowest evidenced material cost, nearest branch with sufficient ready pickup stock, and earliest destination/quantity-specific shipping arrival. Resolve actual stocked branch addresses and coordinates before proximity ranking.
 7. Select one option per part line, quote margin/labor, export text/CSV and optionally email. These downstream product capabilities have not been completed in this repository.
 
-The detailed audits are `WORKFLOW_2_TO_6_AUDIT.md`, `SUPPLIER_COMPLETENESS_AUDIT.md` and `E2E_BRANCH_VALIDATION_2026-10-18.md`. Older milestone documents describe the behavior and limitations at their dates; they are not a current beta certification.
+The detailed audits are `docs/validation/WORKFLOW_2_TO_6_AUDIT.md`, `docs/validation/SUPPLIER_COMPLETENESS_AUDIT.md` and `docs/validation/E2E_BRANCH_VALIDATION_2026-10-18.md`. Older milestone documents describe the behavior and limitations at their dates; they are not a current beta certification.
 
 ## Resume on a new machine
 
@@ -53,7 +53,7 @@ For the previously selected cloud model, edit the private `.env`:
 MODEL_PROVIDER=openai
 OPENAI_MODEL=gpt-6-luna
 OPENAI_ENV_FILE=/absolute/path/to/your/private/.env.local
-CLOUD_BUDGET_USD=0.50
+CLOUD_BUDGET_USD=1.00
 SUPPLIER_ENGINE=legacy
 ```
 
@@ -91,7 +91,7 @@ Open http://127.0.0.1:4310/flow for guided testing and http://127.0.0.1:4310/ fo
 
 On a fresh machine, old job IDs in reports are historical references, not working result links. Create new jobs. The reviewed public York PDF is downloaded again and verified. Runtime data and original evidence remain on the old machine; there is no claim that the repository contains their screenshots or a portable database snapshot.
 
-The app's cumulative estimated cloud usage ledger is `.local/cloud-usage.json`. A new clone has a new ledger, so the configured $0.50 is a per-install app budget, not an account-wide ceiling. If preserving the same cumulative allowance is required, securely transfer that ledger separately with owner-only permissions before model calls. Do not reset/delete an existing ledger to get around a cap. The original machine's paid key may serve other apps, outside this ledger.
+The app's cumulative estimated cloud usage ledger is `.local/cloud-usage.json`. A new clone has a new ledger, so the configured $1.00 is a per-install app budget, not an account-wide ceiling. If preserving the same cumulative allowance is required, securely transfer that ledger separately with owner-only permissions before model calls. Do not reset/delete an existing ledger to get around a cap. The original machine's paid key may serve other apps, outside this ledger.
 
 ## Validated baseline before the interrupted work
 
@@ -146,8 +146,8 @@ The last command can leave its server running. Then `npm run acceptance:journey-
 
 Prior checks included 18 live supplier checks in the guided journey, 11 request failure/replay cases, mutation tests for comparison and capture, real Browser Use unknown-control execution, positive and no-match agent fixtures, and one real Johnstone agent board check. They do not validate today's new general-discovery code.
 
-For local model reevaluation, `npm run test:local-model -- qwen3.5:latest` forces Ollama and zero cloud budget, runs structured/tool-use cases plus browser paths, and must not silently use cloud inference. Inspect `LOCAL_MODEL_VALIDATION.md` and `LUNA_VALIDATION.md` before interpreting a single passing run as consistency.
+For local model reevaluation, `npm run test:local-model -- qwen3.5:latest` forces Ollama and zero cloud budget, runs structured/tool-use cases plus browser paths, and must not silently use cloud inference. Inspect `docs/validation/LOCAL_MODEL_VALIDATION.md` and `docs/validation/LUNA_VALIDATION.md` before interpreting a single passing run as consistency.
 
 ## Suggested prompt for the next coding session
 
-> Read HANDOFF.md, the two original project documents and WORKFLOW_2_TO_6_AUDIT.md. Continue the interrupted general guide/alternative discovery and experimental Stagehand/Browser Use agent implementation. Review and test the new discovery modules before wiring generic alternatives. Preserve source evidence, explicit consent, account authentication, cancellation, capture integrity and comparison gates. Use GPT-6 Luna with the provided private server-side key; keep Ollama testing available. Do not email Collin, order parts, or claim beta readiness until real commercial coverage and end-to-end acceptance pass. The current engine default is legacy; completing and validating the agent is unfinished work.
+> Read HANDOFF.md, the two original project documents and docs/validation/WORKFLOW_2_TO_6_AUDIT.md. Continue the interrupted general guide/alternative discovery and experimental Stagehand/Browser Use agent implementation. Review and test the new discovery modules before wiring generic alternatives. Preserve source evidence, explicit consent, account authentication, cancellation, capture integrity and comparison gates. Use GPT-6 Luna with the provided private server-side key; keep Ollama testing available. Do not email Collin, order parts, or claim beta readiness until real commercial coverage and end-to-end acceptance pass. The current engine default is legacy; completing and validating the agent is unfinished work.

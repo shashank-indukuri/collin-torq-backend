@@ -1,10 +1,10 @@
-import {test} from 'node:test';
+import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import {execFile} from 'node:child_process';
-import {promisify} from 'node:util';
+import { execFile } from 'node:child_process';
+import { promisify } from 'node:util';
 
-test('production recovery configuration initializes the installed Browser Use SDK without network or Chrome',async()=>{
- const script=`
+test('production recovery configuration initializes the installed Browser Use SDK without network or Chrome', async () => {
+  const script = `
 import asyncio, importlib.util, json
 spec = importlib.util.spec_from_file_location('recovery', 'python/recover.py')
 m = importlib.util.module_from_spec(spec)
@@ -21,12 +21,15 @@ async def verify():
     print('SDK_CONSTRUCTOR_OK')
 asyncio.run(verify())
 `;
- const {stdout}=await promisify(execFile)('.venv/bin/python',['-c',script],{timeout:15000,env:{...process.env,ANONYMIZED_TELEMETRY:'false',BROWSER_USE_CLOUD:'false'}});
- assert.match(stdout,/SDK_CONSTRUCTOR_OK/);
+  const { stdout } = await promisify(execFile)('.venv/bin/python', ['-c', script], {
+    timeout: 15000,
+    env: { ...process.env, ANONYMIZED_TELEMETRY: 'false', BROWSER_USE_CLOUD: 'false' },
+  });
+  assert.match(stdout, /SDK_CONSTRUCTOR_OK/);
 });
 
-test('bounded post-model inspection verifies remaining observed candidates without repeats or exceeding the visit budget',async()=>{
- const script=`
+test('bounded post-model inspection verifies remaining observed candidates without repeats or exceeding the visit budget', async () => {
+  const script = `
 import asyncio, importlib.util
 spec = importlib.util.spec_from_file_location('recovery', 'python/recover.py')
 m = importlib.util.module_from_spec(spec)
@@ -51,12 +54,15 @@ async def verify():
     print('BOUNDED_INSPECTION_OK')
 asyncio.run(verify())
 `;
- const {stdout}=await promisify(execFile)('.venv/bin/python',['-c',script],{timeout:15000,env:{...process.env,ANONYMIZED_TELEMETRY:'false',BROWSER_USE_CLOUD:'false'}});
- assert.match(stdout,/BOUNDED_INSPECTION_OK/);
+  const { stdout } = await promisify(execFile)('.venv/bin/python', ['-c', script], {
+    timeout: 15000,
+    env: { ...process.env, ANONYMIZED_TELEMETRY: 'false', BROWSER_USE_CLOUD: 'false' },
+  });
+  assert.match(stdout, /BOUNDED_INSPECTION_OK/);
 });
 
-test('startup failures disconnect the recovery browser before the error returns',async()=>{
- const script=`
+test('startup failures disconnect the recovery browser before the error returns', async () => {
+  const script = `
 import asyncio, importlib.util, io, json
 spec = importlib.util.spec_from_file_location('recovery', 'python/recover.py')
 m = importlib.util.module_from_spec(spec)
@@ -80,6 +86,9 @@ else:
 assert probe.stopped
 print('STARTUP_CLEANUP_OK')
 `;
- const {stdout}=await promisify(execFile)('.venv/bin/python',['-c',script],{timeout:15000,env:{...process.env,ANONYMIZED_TELEMETRY:'false',BROWSER_USE_CLOUD:'false'}});
- assert.match(stdout,/STARTUP_CLEANUP_OK/);
+  const { stdout } = await promisify(execFile)('.venv/bin/python', ['-c', script], {
+    timeout: 15000,
+    env: { ...process.env, ANONYMIZED_TELEMETRY: 'false', BROWSER_USE_CLOUD: 'false' },
+  });
+  assert.match(stdout, /STARTUP_CLEANUP_OK/);
 });
