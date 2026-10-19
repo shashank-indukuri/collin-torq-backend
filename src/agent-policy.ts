@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { createHash } from 'node:crypto';
+import { parseShippingArrival } from './arrival.js';
 export function actionStateKey(
   url: string,
   action: { selector: string; method?: string; arguments?: string[] },
@@ -113,7 +114,7 @@ export function queryNoMatchGrounded(
         )),
   );
 }
-export function groundedFact(fact: AgentFact, body: string) {
+export function groundedFact(fact: AgentFact, body: string, observedAt = new Date().toISOString()) {
   const quote = normalizedText(fact.quote),
     text = normalizedText(body),
     value = normalizedText(fact.value);
@@ -134,10 +135,23 @@ export function groundedFact(fact: AgentFact, body: string) {
   if (['price', 'shippingQuantity', 'branchStock', 'packSize'].includes(fact.field)) {
     const n = Number(fact.value);
     if (!Number.isFinite(n) || n < 0) return false;
-    return new RegExp(`(?:^|[^0-9.])${String(n).replace('.', '\\.')}(?=$|[^0-9.])`).test(
-      quote.replaceAll(',', ''),
-    );
+    const num = String(n).replace('.', '\\.');
+    // A number that starts a range ("1-2 Days") or a duration is not a quantity.
+    const bare = `(?:^|[^0-9.])${num}(?=$|[^0-9.])(?!\\s*(?:-|–|to)\\s*\\d)(?!\\s*(?:business\\s+)?(?:days?|hours?|weeks?)\\b)`;
+    const plain = quote.replaceAll(',', '');
+    if (!new RegExp(bare).test(plain)) return false;
+    // Shipping stock must sit next to a stock label, not anywhere in the quote.
+    if (fact.field === 'shippingQuantity')
+      return new RegExp(
+        `(?:(?:quantity|qty) available|in stock|available|stock)\\s*:?\\s*${num}(?![0-9.])|${num}\\s+(?:in stock|available)\\b`,
+      ).test(plain);
+    return true;
   }
+  // "New quantity: 1" is not a condition. Require a condition label or phrase.
+  if (fact.field === 'condition')
+    return fact.value === 'new'
+      ? /condition\s*:?\s*new\b|\bnew condition\b|\bbrand[- ]new\b|\bfactory[- ]new\b/.test(quote)
+      : /condition\s*:?\s*(?:refurbished|reconditioned)\b|\brefurbished\b/.test(quote);
   if (fact.field === 'pickupReady')
     return fact.value === 'true'
       ? /ready for pickup now|available for pickup today|ready today|in stock today/i.test(quote)
@@ -146,11 +160,16 @@ export function groundedFact(fact: AgentFact, body: string) {
             quote,
           );
   if (fact.field === 'noMatch')
-    return /no results|no products|unable to find|no matches/i.test(quote);
-  // A date may be written in words on the page; the supplier's estimated date
-  // is retained for review, but an agent-only conversion cannot rank delivery.
+    return /no results|no products|unable to find|no matches|(?:couldn.t|could not|can.t|cannot) find|nothing (?:was )?found|0 results/i.test(
+      quote,
+    );
+  // A date is usually written in words on the page. Code, never the model,
+  // converts the quoted phrase; the model's ISO value must equal that result.
   if (fact.field === 'arrivalDate')
-    return /^\d{4}-\d{2}-\d{2}$/.test(value) && quote.includes(value);
+    return (
+      /^\d{4}-\d{2}-\d{2}$/.test(value) &&
+      (quote.includes(value) || parseShippingArrival(fact.quote, observedAt) === value)
+    );
   return quote.includes(value);
 }
 export type DynamicControl = {
@@ -169,7 +188,7 @@ export function permittedAction(
 ) {
   const label = [control.text, control.href, action.description].join(' ');
   if (
-    /add\s*(?:to)?\s*(?:cart|basket|list)|checkout|place order|buy now|purchase now|payment|credit card|delete|logout|log out|sign out|unsubscribe/i.test(
+    /add\s*(?:to)?\s*(?:cart|basket|list)|checkout|captcha|datadome|verif(?:y|ication)|human|robot|audio challenge|slide right|press (?:and|&) hold|place order|buy now|purchase now|payment|credit card|delete|logout|log out|sign out|unsubscribe/i.test(
       label,
     )
   )
@@ -224,4 +243,11 @@ export function permittedAction(
   )
     return false;
   return true;
+}
+
+/** Rendered-text signals of a bot or human-verification page. */
+export function challengeShown(body: string) {
+  return /verification required|verify (?:that )?you are (?:a )?human|are you a robot|slide right to secure|press (?:and|&) hold|unusual (?:activity|traffic)|captcha|datadome|access denied/i.test(
+    body,
+  );
 }

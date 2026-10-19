@@ -81,7 +81,26 @@ export class Worker {
       if (!this.active(id))
         throw new SupplierError('CANCELLED', 'Search cancelled before supplier lookup.');
       try {
-        return await this.supplierLookup(id, input, line, supplier, alternatives, options);
+        try {
+          return await this.supplierLookup(id, input, line, supplier, alternatives, options);
+        } catch (error) {
+          // A tab that Chrome closed under the check is not a supplier answer.
+          // Retry the same read-only query once, in a fresh tab.
+          if (
+            !this.active(id) ||
+            !(error instanceof Error) ||
+            !/Session with given id not found|Target closed|lost its supplier tab|lost the original supplier tab|Target page, context or browser has been closed/i.test(
+              error.message,
+            )
+          )
+            throw error;
+          this.store.update(
+            id,
+            {},
+            `Retrying ${supplier}: the browser tab closed during the check`,
+          );
+          return await this.supplierLookup(id, input, line, supplier, alternatives, options);
+        }
       } catch (error) {
         if (!this.active(id)) throw error;
         if (
@@ -371,9 +390,29 @@ export class Worker {
       return;
     }
     const errors = results.some((r) => r.errors.length > 0);
+    // The agent reads price, stock and stores during the search itself, so the
+    // comparison is built from these results with no second browser pass.
+    // Only geocoding runs here. Legacy offers lack that data and still need Compare.
+    let comparison: Awaited<ReturnType<typeof buildComparison>> | undefined;
+    if (
+      input.mode === 'live' &&
+      config.supplierEngine === 'agent' &&
+      input.origin &&
+      results.some((r) => r.offers.some((o) => o.commercial))
+    ) {
+      this.store.update(id, { results }, 'Comparing prices and nearby stores');
+      const current = this.store.get(id)!;
+      comparison = await buildComparison(current, this.store, () => this.active(id));
+      if (!this.active(id)) return;
+      for (let i = 0; i < results.length; i++) results[i]!.offers = current.results[i]!.offers;
+    }
     this.store.update(
       id,
-      { results, state: errors ? 'partial' : permissionNeeded ? 'needs_permission' : 'completed' },
+      {
+        results,
+        ...(comparison ? { comparison } : {}),
+        state: errors ? 'partial' : permissionNeeded ? 'needs_permission' : 'completed',
+      },
       errors
         ? 'Some supplier checks failed; inspect per-supplier errors. No complete-scope no-match conclusion was made.'
         : permissionNeeded

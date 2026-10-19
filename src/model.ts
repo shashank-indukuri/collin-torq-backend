@@ -7,6 +7,78 @@ export const modelName = () =>
 export const modelClient: ClientLLM = {
   async generate(params) {
     if (config.modelProvider !== 'openai') return ollamaModel.generate(params);
+    try {
+      return await cloudGenerate(params);
+    } catch (error) {
+      // A strict-schema request can still come back as prose. Retry once, then
+      // fail with a stable code instead of a raw JSON.parse message. A response cut
+      // off at the output cap is retried the same way.
+      if (!(error instanceof SyntaxError || error instanceof RetryableOutput)) throw error;
+      console.warn('[model] retrying malformed output:', error.message.slice(0, 160));
+      try {
+        return await cloudGenerate(params);
+      } catch (retry) {
+        if (retry instanceof SyntaxError) throw new Error('OPENAI_STRUCTURED_OUTPUT_INVALID');
+        throw retry;
+      }
+    }
+  },
+};
+/**
+ * Parses a strict-schema reply. A reply can be valid JSON followed by stray
+ * prose, or carry two JSON objects back to back; keep the first complete
+ * object and reject anything else as malformed.
+ */
+export function parseStructured(text: string) {
+  try {
+    return JSON.parse(text);
+  } catch (error) {
+    const start = text.indexOf('{');
+    if (start < 0) throw error;
+    let depth = 0,
+      quoted = false,
+      escaped = false;
+    for (let i = start; i < text.length; i++) {
+      const c = text[i]!;
+      if (quoted) {
+        if (escaped) escaped = false;
+        else if (c === '\\') escaped = true;
+        else if (c === '"') quoted = false;
+      } else if (c === '"') quoted = true;
+      else if (c === '{') depth++;
+      else if (c === '}' && --depth === 0) return JSON.parse(text.slice(start, i + 1));
+    }
+    throw error;
+  }
+}
+/**
+ * Trims string fields that exceed the schema's maxLength. A verbose model
+ * step is shortened instead of failing validation and ending the run; only
+ * length is adjusted, never content or type.
+ */
+export function clampToSchema(value: unknown, schema: unknown): unknown {
+  const s = (schema ?? {}) as Record<string, any>;
+  if (typeof value === 'string' && typeof s.maxLength === 'number')
+    return value.slice(0, s.maxLength);
+  if (Array.isArray(value) && s.items) return value.map((v) => clampToSchema(v, s.items));
+  if (value && typeof value === 'object' && !Array.isArray(value)) {
+    const variants: Record<string, any>[] = s.anyOf ?? s.oneOf ?? [s];
+    const props = Object.assign({}, ...variants.map((v) => v.properties ?? {}));
+    return Object.fromEntries(
+      Object.entries(value as Record<string, unknown>).map(([k, v]) => [
+        k,
+        clampToSchema(v, props[k]),
+      ]),
+    );
+  }
+  return value;
+}
+/** A malformed or truncated model response that one retry may fix. */
+class RetryableOutput extends Error {}
+async function cloudGenerate(
+  params: Parameters<ClientLLM['generate']>[0],
+): ReturnType<ClientLLM['generate']> {
+  {
     const started = Date.now();
     const input: Record<string, unknown>[] = [];
     if (params.systemPrompt) input.push({ role: 'system', content: params.systemPrompt });
@@ -43,7 +115,10 @@ export const modelClient: ClientLLM = {
           }
         : {}),
     });
-    if (response.status !== 'completed') throw new Error('OPENAI_OUTPUT_INCOMPLETE');
+    if (response.status !== 'completed')
+      throw new RetryableOutput(
+        `OPENAI_OUTPUT_INCOMPLETE:${response.incomplete_details?.reason ?? response.status}`,
+      );
     const text = (response.output ?? [])
       .flatMap((item: any) => item.content ?? [])
       .filter((part: any) => part.type === 'output_text')
@@ -56,11 +131,18 @@ export const modelClient: ClientLLM = {
     usage.elapsedMs += Date.now() - started;
     if (structured)
       return {
-        role: 'assistant',
-        content: { type: 'text', text },
-        outputFormat: 'json_schema',
-        structuredContent: JSON.parse(text),
+        role: 'assistant' as const,
+        content: { type: 'text' as const, text },
+        outputFormat: 'json_schema' as const,
+        structuredContent: clampToSchema(
+          parseStructured(text),
+          params.responseFormat?.type === 'json_schema' ? params.responseFormat.schema : {},
+        ) as ReturnType<typeof parseStructured>,
       };
-    return { role: 'assistant', content: { type: 'text', text }, outputFormat: 'text' };
-  },
-};
+    return {
+      role: 'assistant' as const,
+      content: { type: 'text' as const, text },
+      outputFormat: 'text' as const,
+    };
+  }
+}
