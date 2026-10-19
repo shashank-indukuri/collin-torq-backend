@@ -1,0 +1,44 @@
+{
+  "jobId": "a593c589-14fe-45b6-9042-f08b052f9ca1",
+  "base": "http://127.0.0.1:4310",
+  "startedAt": "2026-10-19T16:18:26.808Z",
+  "elapsedMs": 80107,
+  "state": "needs_input",
+  "execution": {
+    "provider": "openai",
+    "model": "gpt-6-luna",
+    "supplierEngine": "agent",
+    "startedAt": "2026-10-19T16:18:26.828Z"
+  },
+  "pass": 2,
+  "listingChanged": 0,
+  "total": 2,
+  "rows": [
+    {
+      "case": "F",
+      "row": 3,
+      "part": "Trane RLY00681",
+      "supplier": "partstown",
+      "expected": "not found",
+      "actual": "no_match",
+      "code": "",
+      "shippingStock": "",
+      "storesWithStock": "",
+      "addresses": 0,
+      "verdict": "PASS"
+    },
+    {
+      "case": "F",
+      "row": 3,
+      "part": "Trane RLY00681",
+      "supplier": "johnstone",
+      "expected": "not found",
+      "actual": "no_match",
+      "code": "",
+      "shippingStock": "",
+      "storesWithStock": "",
+      "addresses": 0,
+      "verdict": "PASS"
+    }
+  ]
+}

@@ -53,7 +53,7 @@ For the previously selected cloud model, edit the private `.env`:
 MODEL_PROVIDER=openai
 OPENAI_MODEL=gpt-6-luna
 OPENAI_ENV_FILE=/absolute/path/to/your/private/.env.local
-CLOUD_BUDGET_USD=0.50
+CLOUD_BUDGET_USD=1.00
 SUPPLIER_ENGINE=legacy
 ```
 
@@ -91,7 +91,7 @@ Open http://127.0.0.1:4310/flow for guided testing and http://127.0.0.1:4310/ fo
 
 On a fresh machine, old job IDs in reports are historical references, not working result links. Create new jobs. The reviewed public York PDF is downloaded again and verified. Runtime data and original evidence remain on the old machine; there is no claim that the repository contains their screenshots or a portable database snapshot.
 
-The app's cumulative estimated cloud usage ledger is `.local/cloud-usage.json`. A new clone has a new ledger, so the configured $0.50 is a per-install app budget, not an account-wide ceiling. If preserving the same cumulative allowance is required, securely transfer that ledger separately with owner-only permissions before model calls. Do not reset/delete an existing ledger to get around a cap. The original machine's paid key may serve other apps, outside this ledger.
+The app's cumulative estimated cloud usage ledger is `.local/cloud-usage.json`. A new clone has a new ledger, so the configured $1.00 is a per-install app budget, not an account-wide ceiling. If preserving the same cumulative allowance is required, securely transfer that ledger separately with owner-only permissions before model calls. Do not reset/delete an existing ledger to get around a cap. The original machine's paid key may serve other apps, outside this ledger.
 
 ## Validated baseline before the interrupted work
 

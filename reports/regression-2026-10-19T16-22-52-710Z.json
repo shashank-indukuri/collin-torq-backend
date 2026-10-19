@@ -1,0 +1,70 @@
+{
+  "jobId": "3b077f6a-6a36-4786-b6b2-55a38df658e9",
+  "base": "http://127.0.0.1:4310",
+  "startedAt": "2026-10-19T16:22:52.710Z",
+  "elapsedMs": 315350,
+  "state": "needs_input",
+  "execution": {
+    "provider": "openai",
+    "model": "gpt-6-luna",
+    "supplierEngine": "agent",
+    "startedAt": "2026-10-19T16:22:52.726Z"
+  },
+  "pass": 3,
+  "listingChanged": 0,
+  "total": 4,
+  "rows": [
+    {
+      "case": "A",
+      "row": 7,
+      "part": "York S1-33101975102",
+      "supplier": "partstown",
+      "expected": "found $198.49",
+      "actual": "found $198.49",
+      "code": "",
+      "shippingStock": 9,
+      "storesWithStock": "",
+      "addresses": 0,
+      "verdict": "PASS"
+    },
+    {
+      "case": "A",
+      "row": 7,
+      "part": "York S1-33101975102",
+      "supplier": "johnstone",
+      "expected": "found $196.72",
+      "actual": "found $196.72",
+      "code": "",
+      "shippingStock": "",
+      "storesWithStock": "Arbutus (1); Rosedale (1); Pittston (1)",
+      "addresses": 3,
+      "verdict": "PASS"
+    },
+    {
+      "case": "C",
+      "row": 11,
+      "part": "York S1-02625511000",
+      "supplier": "partstown",
+      "expected": "found $119.99",
+      "actual": "found $105.49",
+      "code": "",
+      "shippingStock": 20,
+      "storesWithStock": "",
+      "addresses": 0,
+      "verdict": "PASS"
+    },
+    {
+      "case": "C",
+      "row": 11,
+      "part": "York S1-02625511000",
+      "supplier": "johnstone",
+      "expected": "found $102.43",
+      "actual": "error",
+      "code": "SUPPLIER_ERROR",
+      "shippingStock": "",
+      "storesWithStock": "",
+      "addresses": 0,
+      "verdict": "ERROR"
+    }
+  ]
+}
