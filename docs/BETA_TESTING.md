@@ -25,6 +25,9 @@ distances. Expected results are what a person found in early October
 | Model | Manufacturer | Parts | Expected |
 | --- | --- | --- | --- |
 | `York - E1RD036` | York | control board, capacitor | Board: Johnstone $196.72, Parts Town $198.49; Johnstone stores Arbutus, Rosedale, Pittston with addresses. Capacitor: Johnstone $10.75, Parts Town about $12.59 |
+| `MXZ-5D36NL-U1` | Mitsubishi | fan motor, control board | Finds Mitsubishi catalog OBB962A and asks you to confirm the model (the catalog lists `MXZ-5D36NL - CA1`). Steps 3-5 not yet run live on this catalog |
+| `SCWFN8042` | Trane | any | Stops with "supply the part number": no public parts guide exists |
+| `38AH-054` | Carrier | any | Stops with "supply the part number" |
 
 ### Exact part numbers (API)
 

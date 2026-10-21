@@ -1,5 +1,17 @@
 # Torq local sourcing backend
 
+## Beta quick start
+
+```sh
+npm ci
+uv venv .venv --python 3.12 && uv pip install --python .venv/bin/python -r requirements.lock
+cp .env.example .env   # then set MODEL_PROVIDER=openai, SUPPLIER_ENGINE=agent, OPENAI_ENV_FILE
+npm run doctor && npm run check
+SUPPLIER_ENGINE=agent npm start
+```
+
+Open http://127.0.0.1:4310/flow. Sample inputs and expected results are in [docs/BETA_TESTING.md](docs/BETA_TESTING.md). **Using a coding agent (Codex, Claude Code)?** Point it at [AGENTS.md](AGENTS.md). It covers setup, secrets handling and how to guide a test.
+
 **Resuming on another machine? Start with [HANDOFF.md](HANDOFF.md).** It records setup, current validation, missing beta capabilities, and the unfinished general-discovery changes in this checkpoint.
 
 Local Stagehand 4.2.1 + Browser Use 0.13.11 + Chrome, with Ollama or explicitly configured OpenAI GPT-6 Luna. Chrome stays local. Live supplier websites require internet access; the OpenAI option also sends page text to the model API and incurs usage charges.
