@@ -1,12 +1,24 @@
 # Torq local sourcing backend
 
+## Beta quick start
+
+```sh
+npm ci
+uv venv .venv --python 3.12 && uv pip install --python .venv/bin/python -r requirements.lock
+cp .env.example .env   # then set MODEL_PROVIDER=openai, SUPPLIER_ENGINE=agent, OPENAI_ENV_FILE
+npm run doctor && npm run check
+SUPPLIER_ENGINE=agent npm start
+```
+
+Open http://127.0.0.1:4310/flow. Sample inputs and expected results are in [docs/BETA_TESTING.md](docs/BETA_TESTING.md). **Using a coding agent (Codex, Claude Code)?** Point it at [AGENTS.md](AGENTS.md). It covers setup, secrets handling and how to guide a test.
+
 **Resuming on another machine? Start with [HANDOFF.md](HANDOFF.md).** It records setup, current validation, missing beta capabilities, and the unfinished general-discovery changes in this checkpoint.
 
 Local Stagehand 4.2.1 + Browser Use 0.13.11 + Chrome, with Ollama or explicitly configured OpenAI GPT-6 Luna. Chrome stays local. Live supplier websites require internet access; the OpenAI option also sends page text to the model API and incurs usage charges.
 
 ## Optional cloud agent evaluation
 
-Set `MODEL_PROVIDER=openai`, `OPENAI_MODEL=gpt-6-luna`, and `OPENAI_ENV_FILE` to an absolute path containing `OPENAI_API_KEY` (or provide that variable directly). The backend reads only that key from the external file. Never put it in frontend code. `CLOUD_BUDGET_USD` limits this app's cumulative estimated reserved/spent usage, with a maximum of $1.00. It does not cap other applications sharing the key. Unknown request outcomes retain their reservation. Usage persists in the private `.local/cloud-usage.json`; do not delete it to restart a run.
+Set `MODEL_PROVIDER=openai`, `OPENAI_MODEL=gpt-6-luna`, and `OPENAI_ENV_FILE` to an absolute path containing `OPENAI_API_KEY` (or provide that variable directly). The backend reads only that key from the external file. Never put it in frontend code. `CLOUD_BUDGET_USD` limits this app's cumulative estimated reserved/spent usage, with a maximum of $3.00. It does not cap other applications sharing the key. Unknown request outcomes retain their reservation. Usage persists in the private `.local/cloud-usage.json`; do not delete it to restart a run.
 
 `SUPPLIER_ENGINE=agent` selects semantic planning and live control discovery rather than the previous supplier adapters. This is an evaluation path: missing commercial facts stay unknown; alternative replacement validation remains unavailable in this engine. It currently uses page text and semantic DOM controls, not screenshot vision. Browser Use receives a temporary loopback proxy token and shares the same spending controls. Run `npm run acceptance:agent`, `npm run acceptance:workflow-agent`, and `npm run acceptance:agent-live -- johnstone` with the backend stopped. Synthetic checks establish control execution, not real supplier coverage.
 

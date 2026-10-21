@@ -18,7 +18,7 @@ export const config = {
   openaiModel: process.env.OPENAI_MODEL ?? 'gpt-6-luna',
   openaiEnvFile: process.env.OPENAI_ENV_FILE,
   cloudBudgetUsd: Number.isFinite(requestedCloudBudget)
-    ? Math.min(1, Math.max(0, requestedCloudBudget))
+    ? Math.min(3, Math.max(0, requestedCloudBudget))
     : 0,
   context: Number(process.env.OLLAMA_CONTEXT ?? 8192),
   modelTimeout: Number(process.env.OLLAMA_TIMEOUT_MS ?? 120000),
