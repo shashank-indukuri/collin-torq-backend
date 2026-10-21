@@ -11,7 +11,7 @@ SUPPLIER_ENGINE=agent npm start
 ```
 
 Open http://127.0.0.1:4310/flow. The server listens on 127.0.0.1 only.
-Each supplier check takes 1-2 minutes and costs about $0.01 of the $1.00
+Each supplier check takes 1-2 minutes and costs about $0.01 of the $3.00
 cloud budget. Current spend: `curl -s http://127.0.0.1:4310/api/health`.
 
 ## Sample inputs
